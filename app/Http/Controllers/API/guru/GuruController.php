@@ -6,81 +6,124 @@ use App\Http\Controllers\Controller;
 use App\Models\Guru;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
-class GuruController extends Controller
+class GuruApiController extends Controller
 {
     public function getProfil($id)
     {
-        $guru = Guru::where("id", $id)->get();
 
-        return response()->json([
-            'message' => 'success get user by id',
-            'data' => $guru,
+        try {
+            $guru = Guru::where("id", $id)->first();
 
-        ]);
+            if ($guru == null) {
+                return response()->json([
+                    'message' => 'data guru tidak ada',
+
+
+                ]);
+            }
+
+            return response()->json([
+                'message' => 'success get user by id',
+                'data' => $guru,
+
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'failed get user by id',
+                'error' => $th,
+
+            ]);
+        }
     }
     public function editProfil($id, Request $request)
     {
-        $guru = Guru::findOrFail($id);
+        try {
+            $guru = Guru::findOrFail($id);
 
-        if ($request->input('name')) {
-            $guru->name = $request->input('name');
+            if ($request->input('name')) {
+                $guru->name = $request->input('name');
+            }
+            if ($request->input('username')) {
+                $guru->username = $request->input('username');
+            }
+
+            if ($request->input('email')) {
+                $guru->email = $request->input('email');
+            }
+            if ($request->input('password')) {
+                $new_password = Hash::make($request->password);
+                $guru->password = $new_password;
+            }
+
+            $guru->save();
+
+            return response()->json([
+                'message' => 'success update data user'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'failed update data user',
+                "error" => $th
+            ]);
         }
-        if ($request->input('username')) {
-            $guru->username = $request->input('username');
-        }
-
-        if ($request->input('email')) {
-            $guru->email = $request->input('email');
-        }
-
-        $guru->save();
-
-        return response()->json([
-            'message' => 'success update data user'
-        ]);
     }
 
     public function editPhoto($id, Request $request)
     {
-        $getUser = Guru::where("id", $id)->first();
+        try {
+            $getUser = Guru::where("id", $id)->first();
 
 
 
-        $this->deleteFile($getUser->photo_profil);
+            $this->deleteFile($getUser->photo_profil);
 
-        $image = $request->file('photo_profil');
-        $namePhoto = time() . $image->getClientOriginalName();
-        if ($image->getClientMimeType() == 'application/pdf') {
-            return redirect('/createIndex')->with("failed", "File harus berupa png or jpg");
+            $image = $request->file('photo_profil');
+            $namePhoto = time() . $image->getClientOriginalName();
+            if ($image->getClientMimeType() == 'application/pdf') {
+                return redirect('/createIndex')->with("failed", "File harus berupa png or jpg");
+            }
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'photo-profil-guru';
+
+            // upload file
+            $image->move($tujuan_upload, $namePhoto);
+
+            $namePhoto = url("/" . $tujuan_upload . "/" . $namePhoto);
+
+            Guru::where("id", $id)->update([
+                "photo_profil" => $namePhoto
+            ]);
+
+            return response()->json(['message' => "success edit photo profil"]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => "failed edit photo profil",
+                'error' => $th
+            ]);
         }
-        // isi dengan nama folder tempat kemana file diupload
-        $tujuan_upload = 'photo-profil-guru';
-
-        // upload file
-        $image->move($tujuan_upload, $namePhoto);
-
-        $namePhoto = url("/" . $tujuan_upload . "/" . $namePhoto);
-
-        Guru::where("id", $id)->update([
-            "photo_profil" => $namePhoto
-        ]);
-
-        return response()->json(['message' => "success edit photo profil"]);
     }
 
     public function deletePhoto($id)
     {
-        $getUser = Guru::where("id", $id)->first();
+        try {
+            $getUser = Guru::where("id", $id)->first();
 
 
 
-        $this->deleteFile($getUser->photo_profil);
+            $this->deleteFile($getUser->photo_profil);
 
-        Guru::where("id", $id)->update([
-            "photo_profil" => "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
-        ]);
-        return response()->json(['message' => "success delete photo profil"]);
+            Guru::where("id", $id)->update([
+                "photo_profil" => "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
+            ]);
+            return response()->json(['message' => "success delete photo profil"]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => "failed delete photo profil",
+                'error' => $th
+            ]);
+        }
     }
 
 

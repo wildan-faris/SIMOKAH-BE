@@ -6,53 +6,90 @@ use App\Http\Controllers\Controller;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 
-class KelasController extends Controller
+class KelasApiController extends Controller
 {
     public function getAll()
     {
-        $kelas = Kelas::get();
-        return response()->json(['message' => 'Success get all data ', 'data' => $kelas], 200);
+        try {
+            $kelas = Kelas::get();
+            return response()->json(['message' => 'Success get all data ', 'data' => $kelas], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Failed get all data ', 'error' => $th]);
+        }
     }
     public function getById($id)
     {
-        $kelas = Kelas::where("id", $id)->first();
+        try {
+            $kelas = Kelas::where("id", $id)->first();
 
-        if ($kelas == null) {
-            return response()->json(['message' => 'data not found'], 404);
+            if ($kelas == null) {
+                return response()->json(['message' => 'data not found'], 404);
+            }
+
+            return response()->json(['message' => 'Success get data by id', 'data' => $kelas], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Failed get data by id',
+                'error' => $th
+            ]);
         }
-
-        return response()->json(['message' => 'Success get data by id', 'data' => $kelas], 200);
     }
 
     function create(Request $request)
     {
-        Kelas::create([
-            "name" => $request->name,
-            "guru_id" => $request->guru_id
-        ]);
+        try {
+            Kelas::create([
+                "name" => $request->name,
+                "guru_id" => $request->guru_id
+            ]);
 
-        $get = Kelas::get()->last();
+            $get = Kelas::get()->last();
 
 
 
-        return response()->json(['message' => 'Success create data', 'data' => $get], 201);
+            return response()->json(['message' => 'Success create data', 'data' => $get], 201);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Failed create data',
+                'error' => $th
+            ],);
+        }
     }
 
     public function update($id, Request $request)
     {
-        Kelas::where("id", $id)->update([
-            "name" => $request->name,
-            "guru_id" => $request->guru_id
-        ]);
+        try {
+            Kelas::where("id", $id)->update([
+                "name" => $request->name,
+                "guru_id" => $request->guru_id
+            ]);
+
+            $get_kelas = Kelas::where("id", $id)->first();
 
 
 
-        return response()->json(['message' => 'Success edit data',], 201);
+            return response()->json([
+                'message' => 'Success edit data',
+                'data' => $get_kelas
+            ], 201);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Failed edit data',
+                'error' => $th
+            ]);
+        }
     }
 
     public function delete($id)
     {
-        Kelas::where("id", $id)->delete();
-        return response()->json(['message' => 'Success delete data',], 201);
+        try {
+            Kelas::where("id", $id)->delete();
+            return response()->json(['message' => 'Success delete data'], 201);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Failed delete data',
+                'error' => $th
+            ]);
+        }
     }
 }

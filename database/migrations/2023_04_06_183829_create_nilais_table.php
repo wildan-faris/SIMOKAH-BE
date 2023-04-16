@@ -17,6 +17,7 @@ class CreateNilaisTable extends Migration
             $table->id();
             $table->integer("nilai");
             $table->date("tanggal");
+            $table->string("penilai");
             $table->unsignedBigInteger("siswa_id");
             $table->foreign("siswa_id")->references("id")->on("siswas");
             $table->unsignedBigInteger("sub_aktivitas_id");

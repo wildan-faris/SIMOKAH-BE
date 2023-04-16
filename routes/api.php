@@ -9,8 +9,10 @@ use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\orang_tua\AuthOrangTuaController;
+use App\Http\Controllers\API\orang_tua\OrangTuaController;
 use App\Http\Controllers\API\siswa\SiswaController;
 use App\Http\Controllers\API\sub_aktivitas\SubAktivitasController;
+use App\Http\Controllers\API\total_nilai\TotalNilaiController;
 use App\Http\Controllers\Controller;
 
 /*
@@ -46,7 +48,7 @@ Route::prefix('user')->group(function () {
 
 // API route for logout user
 
-Route::get('/login', [Controller::class, 'CheckToken'])->name('login');
+Route::get('/login', [Controller::class, 'CheckToken'])->name('checktoken');
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -63,6 +65,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::prefix('orang-tua')->middleware('auth.bearer')->group(function () {
 
         Route::post('/logout', [AuthOrangTuaController::class, 'logout']);
+        Route::get('/{id}', [OrangTuaController::class, 'getProfil']);
+        Route::put('/{id}', [OrangTuaController::class, 'editProfil']);
+        Route::post('/photo-edit/{id}', [OrangTuaController::class, 'editPhoto']);
+        Route::post('/photo-delete/{id}', [OrangTuaController::class, 'deletePhoto']);
     });
     Route::prefix('guru')->middleware('auth.bearer')->group(function () {
 
@@ -116,5 +122,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/', [NilaiController::class, 'create']);
         Route::put('/{id}', [NilaiController::class, 'update']);
         Route::delete('/{id}', [NilaiController::class, 'delete']);
+    });
+    Route::prefix('total-nilai')->middleware('auth.bearer')->group(function () {
+
+        Route::get('/', [TotalNilaiController::class, 'getAll']);
+        Route::get('/{id}', [TotalNilaiController::class, 'getById']);
+        Route::get('/siswa/aktivitas', [TotalNilaiController::class, 'getBySiswaAndAktivitas']);
+        Route::post('/', [TotalNilaiController::class, 'create']);
+        Route::put('/{id}', [TotalNilaiController::class, 'update']);
+        Route::delete('/{id}', [TotalNilaiController::class, 'delete']);
     });
 });

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 
-class AuthOrangTuaController extends Controller
+class AuthOrangTuaApiController extends Controller
 {
     public function register(Request $request)
     {
@@ -53,6 +53,7 @@ class AuthOrangTuaController extends Controller
 
     public function login(Request $request)
     {
+
         $get_orang_tua = OrangTua::where('email', $request->email)->first();
         if ($get_orang_tua == null) {
 
@@ -79,6 +80,7 @@ class AuthOrangTuaController extends Controller
                 ->json([
                     'message' => 'Hi ' . $orang_tua->name . ', welcome to home',
                     'access_token' => $token,
+                    'id' => $orang_tua->id,
                     'token_type' => 'Bearer',
                 ]);
         } else {
@@ -95,10 +97,12 @@ class AuthOrangTuaController extends Controller
 
 
 
+
         $request->session()->forget('user_token');
         auth()->user()->tokens()->delete();
         return [
             'message' => 'You have successfully logged out and the token was successfully deleted',
+            'token' => $token,
         ];
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Guru;
+use App\Models\OrangTua;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -17,12 +19,17 @@ class CheckBearerToken
     public function handle(Request $request, Closure $next)
     {
 
+        $guru = Guru::where("remember_token", session()->get("user_token"))->first();
+        if ($guru == null) {
 
-        if (session()->get("user_token") == "") {
-            return response()->json([
-                'message' => 'failed',
+            $orang_tua = OrangTua::where("remember_token", session()->get("user_token"))->first();
 
-            ]);
+            if ($orang_tua == null) {
+                return response()->json([
+                    'message' => 'invalid token',
+
+                ]);
+            }
         }
 
         return $next($request);

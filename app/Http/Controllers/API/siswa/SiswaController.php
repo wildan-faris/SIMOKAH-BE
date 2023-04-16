@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 
-class SiswaController extends Controller
+class SiswaApiController extends Controller
 {
     public function getAll()
     {
@@ -26,21 +26,25 @@ class SiswaController extends Controller
 
     function create(Request $request)
     {
-        Siswa::create([
-            "name" => $request->name,
-            "nis" => $request->nis,
-            "jenis_kelamin" => $request->jenis_kelamin,
-            "tempat_lahir" => $request->tempat_lahir,
-            "tanggal_lahir" => $request->tanggal_lahir,
-            "orang_tua_id" => $request->orang_tua_id,
-            "kelas_id" => $request->kelas_id
-        ]);
+        try {
+            Siswa::create([
+                "name" => $request->name,
+                "nis" => $request->nis,
+                "jenis_kelamin" => $request->jenis_kelamin,
+                "tempat_lahir" => $request->tempat_lahir,
+                "tanggal_lahir" => $request->tanggal_lahir,
+                "orang_tua_id" => $request->orang_tua_id,
+                "kelas_id" => $request->kelas_id
+            ]);
 
-        $get = Siswa::get()->last();
+            $get = Siswa::get()->last();
 
 
 
-        return response()->json(['message' => 'Success create data', 'data' => $get], 201);
+            return response()->json(['message' => 'Success create data', 'data' => $get], 201);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Failed create data', 'error' => $th]);
+        }
     }
 
     public function update($id, Request $request)

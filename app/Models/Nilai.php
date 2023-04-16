@@ -12,5 +12,6 @@ class Nilai extends Model
         'sub_aktivitas_id',
         'nilai',
         'tanggal',
+        'penilai',
     ];
 }

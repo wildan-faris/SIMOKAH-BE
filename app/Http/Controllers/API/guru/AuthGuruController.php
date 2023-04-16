@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 
-class AuthGuruController extends Controller
+class AuthGuruApiController extends Controller
 {
     public function register(Request $request)
     {
@@ -41,6 +41,7 @@ class AuthGuruController extends Controller
             'photo_profil' => "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png",
 
         ]);
+
 
 
         return response()
@@ -73,6 +74,7 @@ class AuthGuruController extends Controller
                 ->json([
                     'message' => 'Hi ' . $guru->name . ', welcome to home',
                     'access_token' => $token,
+                    'id' => $guru->id,
                     'token_type' => 'Bearer',
                 ]);
         } else {

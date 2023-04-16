@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\API\nilai;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kelas;
 use App\Models\Nilai;
+use App\Models\Siswa;
 use App\Models\SubAktivitas;
 use App\Models\TotalNilai;
 use Illuminate\Http\Request;
 
-class NilaiController extends Controller
+class NilaiAPIController extends Controller
 {
     public function getAll()
     {
@@ -61,6 +63,7 @@ class NilaiController extends Controller
             "siswa_id" => $request->siswa_id,
             "nilai" => $request->nilai,
             "tanggal" => $request->tanggal,
+            "penilai" => $request->penilai,
         ]);
 
         $nilai = Nilai::get()->last();
@@ -85,6 +88,7 @@ class NilaiController extends Controller
                 "aktivitas_id" => $get_sub_aktivitas->aktivitas_id,
                 "nilai" => $hasil_nilai,
                 "tanggal" => $request->tanggal,
+
             ]);
         }
         TotalNilai::where("siswa_id", $request->siswa_id)->where("sub_aktivitas_id", $request->sub_aktivitas_id)->update([
@@ -106,8 +110,36 @@ class NilaiController extends Controller
             "siswa_id" => $request->siswa_id,
             "nilai" => $request->nilai,
             "tanggal" => $request->tanggal,
+            "penilai" => $request->penilai,
         ]);
+        $get_nilai = Nilai::where("sub_aktivitas_id", $request->sub_aktivitas_id)->where("siswa_id", $request->siswa_id)->get();
+        $len_nilai = Nilai::where("sub_aktivitas_id", $request->sub_aktivitas_id)->where("siswa_id", $request->siswa_id)->count();
+        $rate_nilai = 0;
+        foreach ($get_nilai as $gn) {
 
+            $rate_nilai = $rate_nilai + $gn->nilai;
+        }
+        $hasil_nilai = $rate_nilai / $len_nilai;
+
+        $total_nilai = TotalNilai::where("siswa_id", $request->siswa_id)->where("sub_aktivitas_id", $request->sub_aktivitas_id)->first();
+        $get_sub_aktivitas = SubAktivitas::where("id", $request->sub_aktivitas_id)->first();
+        if ($total_nilai == null) {
+
+            $get_siswa = Siswa::where("id", $request->siswa_id)->first();
+            TotalNilai::create([
+                "siswa_id" => $request->siswa_id,
+                "sub_aktivitas_id" => $request->sub_aktivitas_id,
+                "aktivitas_id" => $get_sub_aktivitas->aktivitas_id,
+                "kelas_id" => $get_siswa->kelas_id,
+                "nilai" => $hasil_nilai,
+                "tanggal" => $request->tanggal,
+
+            ]);
+        }
+        TotalNilai::where("siswa_id", $request->siswa_id)->where("sub_aktivitas_id", $request->sub_aktivitas_id)->update([
+            "nilai" => $hasil_nilai,
+            "tanggal" => $request->tanggal,
+        ]);
         return response()->json([
             "message" => "Success update data"
         ]);

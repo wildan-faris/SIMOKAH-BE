@@ -14,5 +14,11 @@ class TotalNilai extends Model
         'nilai',
         'tanggal',
 
+
     ];
+
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class);
+    }
 }

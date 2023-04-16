@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\SubAktivitas;
 use Illuminate\Http\Request;
 
-class SubAktivitasController extends Controller
+class SubAktivitasApiController extends Controller
 {
     public function getAll()
     {
