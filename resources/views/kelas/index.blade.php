@@ -30,6 +30,8 @@
     </div>
     @endif
 
+    <!-- session untuk admin -->
+
     <div class="card">
         <div class="card-header">
             <div class="text-left">
@@ -73,7 +75,7 @@
                                 <a href="/mahasiswa-detail/{{$dtk->id}}" class="btn btn-sm btn-primary"><i class="fas fa-eye text-white"></i></a>
                                 <a href="" data-toggle="modal" data-target="#edit{{$dtk->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit text-white"></i></a>
 
-                                <a href="/guru/delete/{{$dtk->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                <a href="/kelas/delete/{{$dtk->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
 
                             </td>
                         </tr>
@@ -99,7 +101,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="/guru/edit" method="post">
+                    <form action="/kelas/edit" method="post">
                         @csrf
                         <input name="id" type="hidden" value="{{$dtk->id}}">
                         <div class="row mt-3">
@@ -107,6 +109,21 @@
                                 <label for="" class="form-label">Name</label>
                             </div>
                             <div class="col-8"><input value="{{$dtk->name}}" name="name" class="form-control" type="text" required></div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-2">
+                                <label for="" class="form-label">Guru</label>
+                            </div>
+                            <div class="col-8">
+                                <select name="guru_id" id="guru_id" class="form-control m">
+                                    <option value="{{$dtk->guru_id}}">{{$dtk->guru->name}}</option>
+                                    @foreach ($data_guru as $dtg)
+
+                                    <option value="{{$dtg->id}}">{{$dtg->name}}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
                         </div>
 
                 </div>
@@ -121,6 +138,35 @@
         <!-- /.modal-dialog -->
     </div>
     @endforeach
+    <!--  end session untuk admin -->
+
+
+
+    <!-- session untuk kepala sekolah -->
+
+    <div class="row">
+        @foreach ($data_kelas as $dtk)
+
+
+        <div class="col-md-3 col-sm-6 col-12">
+            <a href="/kelas/view/{{$dtk->id}}">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="nav-icon fas fa-users"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">{{$dtk->name}}</span>
+                        <span class="info-box-number">{{count($dtk->siswa)}} Siswa</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </a>
+        </div>
+
+        @endforeach
+    </div>
+
+    <!-- end session untuk kepala sekolah -->
 
 </div>
 @endsection

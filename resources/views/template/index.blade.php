@@ -188,8 +188,10 @@
     <!-- AdminLTE App -->
     <script src="{{asset('bootstrap/dist/js/adminlte.min.js')}}"></script>
     <!-- AdminLTE for demo purposes -->
-
+    <script src="{{asset('bootstrap/plugins/flot/plugins/jquery.flot.pie.js')}}"></script>
+    <script src="{{asset('bootstrap/plugins/flot/jquery.flot.js')}}"></script>
     <!-- Page specific script -->
+    @yield('scripts')
     <script>
         $(function() {
             $("#example1").DataTable({
@@ -207,6 +209,7 @@
                 "autoWidth": false,
                 "responsive": true,
             });
+
         });
     </script>
 </body>

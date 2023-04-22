@@ -1,18 +1,18 @@
 <?php
 
-use App\Http\Controllers\API\aktivitas\AktivitasController;
-use App\Http\Controllers\API\guru\AuthGuruController;
-use App\Http\Controllers\API\guru\GuruController;
-use App\Http\Controllers\API\kelas\KelasController;
-use App\Http\Controllers\API\nilai\NilaiController;
+use App\Http\Controllers\API\aktivitas\AktivitasApiController;
+use App\Http\Controllers\API\guru\AuthGuruApiController;
+use App\Http\Controllers\API\guru\GuruApiController;
+use App\Http\Controllers\API\kelas\KelasApiController;
+use App\Http\Controllers\API\nilai\NilaiAPIController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\orang_tua\AuthOrangTuaController;
-use App\Http\Controllers\API\orang_tua\OrangTuaController;
-use App\Http\Controllers\API\siswa\SiswaController;
-use App\Http\Controllers\API\sub_aktivitas\SubAktivitasController;
-use App\Http\Controllers\API\total_nilai\TotalNilaiController;
+use App\Http\Controllers\API\orang_tua\AuthOrangTuaApiController;
+use App\Http\Controllers\API\orang_tua\OrangTuaApiController;
+use App\Http\Controllers\API\siswa\SiswaApiController;
+use App\Http\Controllers\API\sub_aktivitas\SubAktivitasApiController;
+use App\Http\Controllers\API\total_nilai\TotalNilaiApiController;
 use App\Http\Controllers\Controller;
 
 /*
@@ -28,14 +28,14 @@ use App\Http\Controllers\Controller;
 
 Route::prefix('orang-tua')->group(function () {
     //API untuk melakukan register orang tua
-    Route::post('/register', [AuthOrangTuaController::class, 'register']);
-    Route::post('/login', [AuthOrangTuaController::class, 'login']);
+    Route::post('/register', [AuthOrangTuaApiController::class, 'register']);
+    Route::post('/login', [AuthOrangTuaApiController::class, 'login']);
 });
 
 Route::prefix('guru')->group(function () {
     //API untuk melakukan register orang tua
-    Route::post('/register', [AuthGuruController::class, 'register']);
-    Route::post('/login', [AuthGuruController::class, 'login']);
+    Route::post('/register', [AuthGuruApiController::class, 'register']);
+    Route::post('/login', [AuthGuruApiController::class, 'login']);
 });
 
 Route::prefix('user')->group(function () {
@@ -64,72 +64,72 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::prefix('orang-tua')->middleware('auth.bearer')->group(function () {
 
-        Route::post('/logout', [AuthOrangTuaController::class, 'logout']);
-        Route::get('/{id}', [OrangTuaController::class, 'getProfil']);
-        Route::put('/{id}', [OrangTuaController::class, 'editProfil']);
-        Route::post('/photo-edit/{id}', [OrangTuaController::class, 'editPhoto']);
-        Route::post('/photo-delete/{id}', [OrangTuaController::class, 'deletePhoto']);
+        Route::post('/logout', [AuthOrangTuaApiController::class, 'logout']);
+        Route::get('/{id}', [OrangTuaApiController::class, 'getProfil']);
+        Route::put('/{id}', [OrangTuaApiController::class, 'editProfil']);
+        Route::post('/photo-edit/{id}', [OrangTuaApiController::class, 'editPhoto']);
+        Route::post('/photo-delete/{id}', [OrangTuaApiController::class, 'deletePhoto']);
     });
     Route::prefix('guru')->middleware('auth.bearer')->group(function () {
 
-        Route::post('/logout', [AuthGuruController::class, 'logout']);
-        Route::get('/{id}', [GuruController::class, 'getProfil']);
-        Route::put('/{id}', [GuruController::class, 'editProfil']);
-        Route::post('/photo-edit/{id}', [GuruController::class, 'editPhoto']);
-        Route::post('/photo-delete/{id}', [GuruController::class, 'deletePhoto']);
+        Route::post('/logout', [AuthGuruApiController::class, 'logout']);
+        Route::get('/{id}', [GuruApiController::class, 'getProfil']);
+        Route::put('/{id}', [GuruApiController::class, 'editProfil']);
+        Route::post('/photo-edit/{id}', [GuruApiController::class, 'editPhoto']);
+        Route::post('/photo-delete/{id}', [GuruApiController::class, 'deletePhoto']);
     });
 
 
     Route::prefix('kelas')->middleware('auth.bearer')->group(function () {
 
-        Route::get('/', [KelasController::class, 'getAll']);
-        Route::get('/{id}', [KelasController::class, 'getById']);
-        Route::post('/', [KelasController::class, 'create']);
-        Route::put('/{id}', [KelasController::class, 'update']);
-        Route::delete('/{id}', [KelasController::class, 'delete']);
+        Route::get('/', [KelasApiController::class, 'getAll']);
+        Route::get('/{id}', [KelasApiController::class, 'getById']);
+        Route::post('/', [KelasApiController::class, 'create']);
+        Route::put('/{id}', [KelasApiController::class, 'update']);
+        Route::delete('/{id}', [KelasApiController::class, 'delete']);
     });
     Route::prefix('siswa')->middleware('auth.bearer')->group(function () {
 
-        Route::get('/', [SiswaController::class, 'getAll']);
-        Route::get('/{id}', [SiswaController::class, 'getById']);
-        Route::post('/', [SiswaController::class, 'create']);
-        Route::put('/{id}', [SiswaController::class, 'update']);
-        Route::delete('/{id}', [SiswaController::class, 'delete']);
+        Route::get('/', [SiswaApiController::class, 'getAll']);
+        Route::get('/{id}', [SiswaApiController::class, 'getById']);
+        Route::post('/', [SiswaApiController::class, 'create']);
+        Route::put('/{id}', [SiswaApiController::class, 'update']);
+        Route::delete('/{id}', [SiswaApiController::class, 'delete']);
     });
     Route::prefix('aktivitas')->middleware('auth.bearer')->group(function () {
 
-        Route::get('/', [AktivitasController::class, 'getAll']);
-        Route::get('/{id}', [AktivitasController::class, 'getById']);
-        Route::post('/', [AktivitasController::class, 'create']);
-        Route::put('/{id}', [AktivitasController::class, 'update']);
-        Route::delete('/{id}', [AktivitasController::class, 'delete']);
+        Route::get('/', [AktivitasApiController::class, 'getAll']);
+        Route::get('/{id}', [AktivitasApiController::class, 'getById']);
+        Route::post('/', [AktivitasApiController::class, 'create']);
+        Route::put('/{id}', [AktivitasApiController::class, 'update']);
+        Route::delete('/{id}', [AktivitasApiController::class, 'delete']);
     });
     Route::prefix('sub-aktivitas')->middleware('auth.bearer')->group(function () {
 
-        Route::get('/', [SubAktivitasController::class, 'getAll']);
-        Route::get('/{id}', [SubAktivitasController::class, 'getById']);
-        Route::get('/aktivitas/{aktivitas_id}', [SubAktivitasController::class, 'getByAktivitas']);
-        Route::post('/', [SubAktivitasController::class, 'create']);
-        Route::put('/{id}', [SubAktivitasController::class, 'update']);
-        Route::delete('/{id}', [SubAktivitasController::class, 'delete']);
+        Route::get('/', [SubAktivitasApiController::class, 'getAll']);
+        Route::get('/{id}', [SubAktivitasApiController::class, 'getById']);
+        Route::get('/aktivitas/{aktivitas_id}', [SubAktivitasApiController::class, 'getByAktivitas']);
+        Route::post('/', [SubAktivitasApiController::class, 'create']);
+        Route::put('/{id}', [SubAktivitasApiController::class, 'update']);
+        Route::delete('/{id}', [SubAktivitasApiController::class, 'delete']);
     });
     Route::prefix('nilai')->middleware('auth.bearer')->group(function () {
 
-        Route::get('/', [NilaiController::class, 'getAll']);
-        Route::get('/{id}', [NilaiController::class, 'getById']);
+        Route::get('/', [NilaiAPIController::class, 'getAll']);
+        Route::get('/{id}', [NilaiAPIController::class, 'getById']);
 
-        Route::get('/sub-aktivitas/siswa', [NilaiController::class, 'getBySiswaAndSubAktivitas']);
-        Route::post('/', [NilaiController::class, 'create']);
-        Route::put('/{id}', [NilaiController::class, 'update']);
-        Route::delete('/{id}', [NilaiController::class, 'delete']);
+        Route::get('/sub-aktivitas/siswa', [NilaiAPIController::class, 'getBySiswaAndSubAktivitas']);
+        Route::post('/', [NilaiAPIController::class, 'create']);
+        Route::put('/{id}', [NilaiAPIController::class, 'update']);
+        Route::delete('/{id}', [NilaiAPIController::class, 'delete']);
     });
     Route::prefix('total-nilai')->middleware('auth.bearer')->group(function () {
 
-        Route::get('/', [TotalNilaiController::class, 'getAll']);
-        Route::get('/{id}', [TotalNilaiController::class, 'getById']);
-        Route::get('/siswa/aktivitas', [TotalNilaiController::class, 'getBySiswaAndAktivitas']);
-        Route::post('/', [TotalNilaiController::class, 'create']);
-        Route::put('/{id}', [TotalNilaiController::class, 'update']);
-        Route::delete('/{id}', [TotalNilaiController::class, 'delete']);
+        Route::get('/', [TotalNilaiApiController::class, 'getAll']);
+        Route::get('/{id}', [TotalNilaiApiController::class, 'getById']);
+        Route::get('/siswa/aktivitas', [TotalNilaiApiController::class, 'getBySiswaAndAktivitas']);
+        Route::post('/', [TotalNilaiApiController::class, 'create']);
+        Route::put('/{id}', [TotalNilaiApiController::class, 'update']);
+        Route::delete('/{id}', [TotalNilaiApiController::class, 'delete']);
     });
 });

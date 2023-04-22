@@ -35,3 +35,6 @@ Route::get('/kelas/create/index', [kelasController::class, 'createIndex']);
 Route::post('/kelas/create', [kelasController::class, 'create']);
 Route::post('/kelas/edit', [kelasController::class, 'edit']);
 Route::get('/kelas/delete/{id}', [kelasController::class, 'delete']);
+Route::get('/kelas/view/{id}', [kelasController::class, 'siswaByKelas']);
+Route::get('/kelas/grafik/kelas/{id}', [kelasController::class, 'grafikByKelas']);
+Route::get('/kelas/grafik/siswa/{id}', [kelasController::class, 'grafikBySiswa']);

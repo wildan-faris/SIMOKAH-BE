@@ -44,7 +44,7 @@ class guruController extends Controller
             'email' => $request->email,
 
         ]);
-        return redirect('/guru/index')->with("success_edit", "Berhasil Menambahkan Data");
+        return redirect('/guru/index')->with("success_edit", "Berhasil Mengubah Data");
     }
 
     public function delete($id)
