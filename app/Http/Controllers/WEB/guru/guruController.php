@@ -11,17 +11,26 @@ class guruController extends Controller
 {
     public function index()
     {
+        if (session()->get("remember_token") == "") {
+            return redirect("/lol")->with("failed", "anda belum login");
+        }
+
         $data_guru = Guru::get();
         return view('guru.index', compact("data_guru"));
     }
     public function createIndex()
     {
-
+        if (session()->get("remember_token") == "") {
+            return redirect("/lol")->with("failed", "anda belum login");
+        }
         return view('guru.create');
     }
 
     public function create(Request $request)
     {
+        if (session()->get("remember_token") == "") {
+            return redirect("/lol")->with("failed", "anda belum login");
+        }
         $get_guru = Guru::where("email", $request->email)->first();
         if ($get_guru !== null) {
             return redirect('/guru/create/index')->with("failed_create", "Gagal Menambahkan Data");
@@ -37,7 +46,9 @@ class guruController extends Controller
     }
     public function edit(Request $request)
     {
-
+        if (session()->get("remember_token") == "") {
+            return redirect("/lol")->with("failed", "anda belum login");
+        }
         Guru::where("id", $request->id)->update([
             'name' => $request->name,
             'username' => $request->username,
@@ -49,6 +60,9 @@ class guruController extends Controller
 
     public function delete($id)
     {
+        if (session()->get("remember_token") == "") {
+            return redirect("/lol")->with("failed", "anda belum login");
+        }
         Guru::where("id", $id)->delete();
         return redirect('/guru/index')->with("success_delete", "Berhasil Menghapus Data");
     }

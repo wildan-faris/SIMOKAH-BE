@@ -38,24 +38,19 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                <li class="nav-item">
 
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                <li class="nav-item">
+                    @if (session()->get('role') === "admin")
+                    <a href="/admin/logout" class="text-white">
+                        <div class=""><i class="fas fa-sign-out-alt"></i> Logout</div>
+                    </a>
+                    @elseif (session()->get('role') === "kepala sekolah")
+                    <a href="/kepala_sekolah/logout" class="text-white">
+                        <div class=""><i class="fas fa-sign-out-alt"></i> Logout</div>
+                    </a>
+                    @endif
+
+
                 </li>
 
                 <!-- Messages Dropdown Menu -->
@@ -72,7 +67,7 @@
             <!-- Brand Logo -->
             <a href="../index3.html" class="brand-link ">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">PHAS</span>
+                <span class="brand-text text-dark text-bold">PHAS</span>
             </a>
             <hr>
             <div class="sidebar">
@@ -82,7 +77,7 @@
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Tes</a>
+                        <h4 href="#" class="d-block text-dark text-bold">{{session()->get('role')}}</h4>
                     </div>
                 </div>
                 <hr>
@@ -101,7 +96,21 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item {{(request()->is('guru/index')?'bg-secondary':'')}} {{(request()->is('guru/create/index')?'bg-secondary':'')}}">
+                        @if (session()->get("role") == "admin")
+                        <li class="nav-item {{(request()->is('kepala_sekolah/index')?'bg-secondary':'')}}
+                         {{(request()->is('kepala_sekolah/create/index')?'bg-secondary':'')}}">
+                            <a href="/kepala_sekolah/index" class="nav-link ">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    KEPALA SEKOLAH
+
+                                </p>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item {{(request()->is('guru/index')?'bg-secondary':'')}} 
+                        {{(request()->is('guru/create/index')?'bg-secondary':'')}}">
                             <a href="/guru/index" class="nav-link ">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
@@ -110,7 +119,16 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item {{(request()->is('kelas/index')?'bg-secondary':'')}}">
+                        @endif
+
+
+
+
+
+
+                        <li class="nav-item 
+                        {{(request()->is('kelas/*')?'bg-secondary':'')}}
+                         ">
                             <a href="/kelas/index" class="nav-link ">
                                 <i class="nav-icon fas fa-chalkboard-teacher"></i>
                                 <p>

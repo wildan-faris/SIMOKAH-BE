@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ahli_parenting\AuthAhliParentingApiController;
 use App\Http\Controllers\API\aktivitas\AktivitasApiController;
 use App\Http\Controllers\API\guru\AuthGuruApiController;
 use App\Http\Controllers\API\guru\GuruApiController;
@@ -38,6 +39,13 @@ Route::prefix('guru')->group(function () {
     Route::post('/login', [AuthGuruApiController::class, 'login']);
 });
 
+
+Route::prefix('ahli-parenting')->group(function () {
+    //API untuk melakukan register orang tua
+    Route::post('/register', [AuthAhliParentingApiController::class, 'register']);
+    Route::post('/login', [AuthAhliParentingApiController::class, 'login']);
+});
+
 Route::prefix('user')->group(function () {
     //API route for register new user
     Route::post('/register', [UserController::class, 'register']);
@@ -59,6 +67,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::put('/edit-profil/{id}', [UserController::class, 'EditProfil']);
         Route::post('/edit-photo-profil/{id}', [UserController::class, 'EditPhoto']);
         Route::post('/delete-photo-profil/{id}', [UserController::class, 'DeletePhoto']);
+    });
+
+    Route::prefix('ahli-parenting')->group(function () {
+        //API untuk melakukan register orang tua
+        Route::post('/logout', [AuthAhliParentingApiController::class, 'logout']);
     });
 
 

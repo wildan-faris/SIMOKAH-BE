@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\WEB\kepala_sekolah\kepalaSekolahController;
+use App\Http\Controllers\WEB\admin\adminController;
 use App\Http\Controllers\WEB\guru\guruController;
 use App\Http\Controllers\WEB\kelas\kelasController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    if (session()->get("remember_token") == "") {
+        return redirect("/lol")->with("failed", "anda belum login");
+    }
     return view('index');
 });
 Route::get('login', function () {
@@ -38,3 +43,19 @@ Route::get('/kelas/delete/{id}', [kelasController::class, 'delete']);
 Route::get('/kelas/view/{id}', [kelasController::class, 'siswaByKelas']);
 Route::get('/kelas/grafik/kelas/{id}', [kelasController::class, 'grafikByKelas']);
 Route::get('/kelas/grafik/siswa/{id}', [kelasController::class, 'grafikBySiswa']);
+
+// admin controller
+Route::get('/admin/loginIndex', [adminController::class, 'loginIndex']);
+Route::get('/admin/registerIndex', [adminController::class, 'registerIndex']);
+Route::post('/admin/register', [adminController::class, 'register']);
+Route::post('/admin/login', [adminController::class, 'login']);
+Route::get('/admin/logout', [adminController::class, 'logout']);
+
+// kepala_sekolah controller
+Route::get('/kepala_sekolah/index', [kepalaSekolahController::class, 'index']);
+Route::get('/kepala_sekolah/create/index', [kepalaSekolahController::class, 'createIndex']);
+Route::post('/kepala_sekolah/register', [kepalaSekolahController::class, 'register']);
+Route::post('/kepala_sekolah/delete', [kepalaSekolahController::class, 'delete']);
+Route::get('/kepala_sekolah/loginIndex', [kepalaSekolahController::class, 'loginIndex']);
+Route::post('/kepala_sekolah/login', [kepalaSekolahController::class, 'login']);
+Route::get('/kepala_sekolah/logout', [kepalaSekolahController::class, 'logout']);

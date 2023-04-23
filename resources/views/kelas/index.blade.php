@@ -31,7 +31,7 @@
     @endif
 
     <!-- session untuk admin -->
-
+    @if (session()->get("role") == "admin")
     <div class="card">
         <div class="card-header">
             <div class="text-left">
@@ -72,7 +72,7 @@
                             <td>{{$dtk->name}}</td>
 
                             <td>
-                                <a href="/mahasiswa-detail/{{$dtk->id}}" class="btn btn-sm btn-primary"><i class="fas fa-eye text-white"></i></a>
+
                                 <a href="" data-toggle="modal" data-target="#edit{{$dtk->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit text-white"></i></a>
 
                                 <a href="/kelas/delete/{{$dtk->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
@@ -139,10 +139,13 @@
     </div>
     @endforeach
     <!--  end session untuk admin -->
-
+    @else
+    @endif
 
 
     <!-- session untuk kepala sekolah -->
+    @if (session()->get("role") == "kepala sekolah")
+
 
     <div class="row">
         @foreach ($data_kelas as $dtk)
@@ -165,7 +168,7 @@
 
         @endforeach
     </div>
-
+    @endif
     <!-- end session untuk kepala sekolah -->
 
 </div>

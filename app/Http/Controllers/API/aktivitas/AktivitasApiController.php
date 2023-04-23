@@ -10,49 +10,69 @@ class AktivitasApiController extends Controller
 {
     public function getAll()
     {
-        $aktivitas = Aktivitas::with("sub_aktivitas")->get();
-        return response()->json(['message' => 'Success get all data ', 'data' => $aktivitas], 200);
+        try {
+            $aktivitas = Aktivitas::with("sub_aktivitas")->get();
+            return response()->json(['message' => 'Success get all data ', 'data' => $aktivitas], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Failed get all data ', 'data' => $th]);
+        }
     }
     public function getById($id)
     {
-        $aktivitas = Aktivitas::with("sub_aktivitas")->where("id", $id)->first();
+        try {
+            $aktivitas = Aktivitas::with("sub_aktivitas")->where("id", $id)->first();
 
-        if ($aktivitas == null) {
-            return response()->json(['message' => 'data not found'], 404);
+            if ($aktivitas == null) {
+                return response()->json(['message' => 'data not found'], 404);
+            }
+
+            return response()->json(['message' => 'Success get data by id', 'data' => $aktivitas], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Failed get data by id', 'data' => $th]);
         }
-
-        return response()->json(['message' => 'Success get data by id', 'data' => $aktivitas], 200);
     }
 
     function create(Request $request)
     {
-        Aktivitas::create([
-            "name" => $request->name,
+        try {
+            Aktivitas::create([
+                "name" => $request->name,
 
-        ]);
+            ]);
 
-        $get = Aktivitas::get()->last();
+            $get = Aktivitas::get()->last();
 
 
 
-        return response()->json(['message' => 'Success create data', 'data' => $get], 201);
+            return response()->json(['message' => 'Success create data', 'data' => $get], 201);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Failed create data', 'data' => $th]);
+        }
     }
 
     public function update($id, Request $request)
     {
-        Aktivitas::where("id", $id)->update([
-            "name" => $request->name,
+        try {
+            Aktivitas::where("id", $id)->update([
+                "name" => $request->name,
 
-        ]);
+            ]);
 
 
 
-        return response()->json(['message' => 'Success edit data',], 201);
+            return response()->json(['message' => 'Success edit data',], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Failed edit data', 'data' => $th]);
+        }
     }
 
     public function delete($id)
     {
-        Aktivitas::where("id", $id)->delete();
-        return response()->json(['message' => 'Success delete data',], 201);
+        try {
+            Aktivitas::where("id", $id)->delete();
+            return response()->json(['message' => 'Success delete data',], 201);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Failed delete data', 'data' => $th]);
+        }
     }
 }

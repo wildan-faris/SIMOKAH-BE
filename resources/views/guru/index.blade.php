@@ -57,6 +57,7 @@
                             <th>Name</th>
                             <th>Username</th>
                             <th>Email</th>
+                            <th>Foto</th>
                             <th>Aksi</th>
 
                         </tr>
@@ -71,8 +72,9 @@
                             <td>{{$dtg->name}}</td>
                             <td>{{$dtg->username}}</td>
                             <td>{{$dtg->email}}</td>
+                            <td class="col-3"><img width="50px" height="50px" src=" {{$dtg->photo_profil}}" alt=""></td>
                             <td>
-                                <a href="/mahasiswa-detail/{{$dtg->id}}" class="btn btn-sm btn-primary"><i class="fas fa-eye text-white"></i></a>
+
                                 <a href="" data-toggle="modal" data-target="#edit{{$dtg->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit text-white"></i></a>
 
                                 <a href="/guru/delete/{{$dtg->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>

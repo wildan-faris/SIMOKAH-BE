@@ -15,6 +15,10 @@ class kelasController extends Controller
 {
     public function index()
     {
+        if (session()->get("remember_token") == "") {
+            return redirect("/lol")->with("failed", "anda belum login");
+        }
+
         $data_kelas = Kelas::with("guru")->with("siswa")->get();
         $data_guru = Guru::get();
         return view('kelas.index', compact("data_kelas", "data_guru"));
@@ -22,12 +26,19 @@ class kelasController extends Controller
 
     public function createIndex()
     {
+
+        if (session()->get("remember_token") == "") {
+            return redirect("/lol")->with("failed", "anda belum login");
+        }
         $data_guru = Guru::get();
         return view('kelas.create', compact("data_guru"));
     }
 
     public function create(Request $request)
     {
+        if (session()->get("remember_token") == "") {
+            return redirect("/lol")->with("failed", "anda belum login");
+        }
 
         Kelas::insert([
             'name' => $request->name,
@@ -38,6 +49,9 @@ class kelasController extends Controller
 
     public function edit(Request $request)
     {
+        if (session()->get("remember_token") == "") {
+            return redirect("/lol")->with("failed", "anda belum login");
+        }
 
         Kelas::where("id", $request->id)->update([
             'name' => $request->name,
@@ -49,12 +63,21 @@ class kelasController extends Controller
 
     public function delete($id)
     {
+        if (session()->get("remember_token") == "") {
+            return redirect("/lol")->with("failed", "anda belum login");
+        }
+
         Kelas::where("id", $id)->delete();
         return redirect('/kelas/index')->with("success_delete", "Berhasil Menghapus Data");
     }
 
     public function siswaByKelas($id)
     {
+
+        if (session()->get("remember_token") == "") {
+            return redirect("/lol")->with("failed", "anda belum login");
+        }
+
         $data_siswa = Siswa::where("kelas_id", $id)->get();
         $data_kelas = Kelas::where("id", $id)->first();
         return view('kelas.view', compact("data_siswa", "data_kelas"));
@@ -69,6 +92,10 @@ class kelasController extends Controller
     }
     public function grafikBySiswa($id)
     {
+
+        if (session()->get("remember_token") == "") {
+            return redirect("/lol")->with("failed", "anda belum login");
+        }
         $data_siswa = Siswa::where("id", $id)->first();
 
         $data_aktivitas = Aktivitas::with("sub_aktivitas")->get();
