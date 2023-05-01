@@ -42,7 +42,7 @@
             <div class="text-right">
                 @if ($len_kepala_sekolah === 0)
                 <a type="button" class="btn btn-primary" href="/kepala_sekolah/create/index">
-                    <i class="fas fa-plus"></i> Tambah Data
+                    <i class="fas fa-user-plus"> </i> Tambah Data
                 </a>
                 @endif
 

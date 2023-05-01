@@ -100,7 +100,7 @@
                         <li class="nav-item {{(request()->is('kepala_sekolah/index')?'bg-secondary':'')}}
                          {{(request()->is('kepala_sekolah/create/index')?'bg-secondary':'')}}">
                             <a href="/kepala_sekolah/index" class="nav-link ">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="nav-icon fas fa-user-tie"></i>
                                 <p>
                                     KEPALA SEKOLAH
 
@@ -115,6 +115,17 @@
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     GURU
+
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item {{(request()->is('ahli-parenting/index')?'bg-secondary':'')}} 
+                        {{(request()->is('ahli-parenting/create/index')?'bg-secondary':'')}}">
+                            <a href="/ahli-parenting/index" class="nav-link ">
+
+                                <i class="nav-icon fas fa-user-secret"></i>
+                                <p>
+                                    AHLI PARENTING
 
                                 </p>
                             </a>

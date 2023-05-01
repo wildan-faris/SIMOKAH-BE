@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h3 class="text-center text-secondary">DATA GURU</h3>
+    <h3 class="text-center text-secondary">DATA ahli-parenting</h3>
     @if ($messege = Session::get('success_delete'))
     <div class="alert alert-danger alert-dismissible " role="alert">
         <strong>{{$messege}}
@@ -40,7 +40,7 @@
             </div>
 
             <div class="text-right">
-                <a type="button" class="btn btn-primary" href="/guru/create/index">
+                <a type="button" class="btn btn-primary" href="/ahli-parenting/create/index">
                     <i class="fas fa-user-plus"> </i> Tambah Data
                 </a>
             </div>
@@ -55,7 +55,6 @@
                         <tr>
                             <th>No</th>
                             <th>Name</th>
-                            <th>Username</th>
                             <th>Email</th>
                             <th>Foto</th>
                             <th>Aksi</th>
@@ -66,18 +65,18 @@
                         @php
                         $no =1;
                         @endphp
-                        @foreach ($data_guru as $dtg)
+                        @foreach ($data_ahli_parenting as $dtap)
                         <tr class="text-center fw-normal">
                             <td>{{$no++}} </td>
-                            <td>{{$dtg->name}}</td>
-                            <td>{{$dtg->username}}</td>
-                            <td>{{$dtg->email}}</td>
-                            <td class="col-3"><img width="50px" height="50px" src=" {{$dtg->photo_profil}}" alt=""></td>
+                            <td>{{$dtap->name}}</td>
+
+                            <td>{{$dtap->email}}</td>
+                            <td class="col-3"><img width="50px" height="50px" src=" {{$dtap->photo_profil}}" alt=""></td>
                             <td>
 
-                                <a href="" data-toggle="modal" data-target="#edit{{$dtg->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit text-white"></i></a>
+                                <a href="" data-toggle="modal" data-target="#edit{{$dtap->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit text-white"></i></a>
 
-                                <a href="/guru/delete/{{$dtg->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                <a href="/ahli-parenting/delete/{{$dtap->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
 
                             </td>
                         </tr>
@@ -92,8 +91,8 @@
     </div>
 
     <!-- modal edit data -->
-    @foreach ($data_guru as $dtg)
-    <div class="modal fade" id="edit{{$dtg->id}}">
+    @foreach ($data_ahli_parenting as $dtap)
+    <div class="modal fade" id="edit{{$dtap->id}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -103,27 +102,22 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="/guru/edit" method="post">
+                    <form action="/ahli-parenting/edit" method="post">
                         @csrf
-                        <input name="id" type="hidden" value="{{$dtg->id}}">
+                        <input name="id" type="hidden" value="{{$dtap->id}}">
                         <div class="row mt-3">
                             <div class="col-2">
                                 <label for="" class="form-label">Name</label>
                             </div>
-                            <div class="col-8"><input value="{{$dtg->name}}" name="name" class="form-control" type="text" required></div>
+                            <div class="col-8"><input value="{{$dtap->name}}" name="name" class="form-control" type="text" required></div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-2">
                                 <label for="" class="form-label">Email</label>
                             </div>
-                            <div class="col-8"><input value="{{$dtg->email}}" name="email" class="form-control" type="email" required></div>
+                            <div class="col-8"><input value="{{$dtap->email}}" name="email" class="form-control" type="email" required></div>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-2">
-                                <label for="" class="form-label">Username</label>
-                            </div>
-                            <div class="col-8"><input value="{{$dtg->username}}" name="username" class="form-control" type="text" required></div>
-                        </div>
+
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

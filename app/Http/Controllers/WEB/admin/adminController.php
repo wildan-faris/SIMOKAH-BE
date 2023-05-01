@@ -63,7 +63,7 @@ class adminController extends Controller
     public function logout(Request $request)
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/loginIndex")->with("failed", "gagal login");
+            return redirect("/admin/loginIndex")->with("failed", "gagal login");
         }
         $request->session()->flush();
         return redirect("/admin/loginIndex")->with("success", "berhasil logout");

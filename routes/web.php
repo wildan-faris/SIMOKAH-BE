@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\WEB\kepala_sekolah\kepalaSekolahController;
 use App\Http\Controllers\WEB\admin\adminController;
+use App\Http\Controllers\WEB\ahli_parenting\AhliParentingController;
 use App\Http\Controllers\WEB\guru\guruController;
 use App\Http\Controllers\WEB\kelas\kelasController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,12 @@ Route::get('/guru/create/index', [guruController::class, 'createIndex']);
 Route::post('/guru/create', [guruController::class, 'create']);
 Route::post('/guru/edit', [guruController::class, 'edit']);
 Route::get('/guru/delete/{id}', [guruController::class, 'delete']);
+// ahli_parenting controller
+Route::get('/ahli-parenting/index', [AhliParentingController::class, 'index']);
+Route::get('/ahli-parenting/create/index', [AhliParentingController::class, 'createIndex']);
+Route::post('/ahli-parenting/create', [AhliParentingController::class, 'create']);
+Route::post('/ahli-parenting/edit', [AhliParentingController::class, 'edit']);
+Route::get('/ahli-parenting/delete/{id}', [AhliParentingController::class, 'delete']);
 
 // kelas controller
 Route::get('/kelas/index', [kelasController::class, 'index']);
