@@ -59,10 +59,11 @@ Route::post('/admin/login', [adminController::class, 'login']);
 Route::get('/admin/logout', [adminController::class, 'logout']);
 
 // kepala_sekolah controller
-Route::get('/kepala_sekolah/index', [kepalaSekolahController::class, 'index']);
-Route::get('/kepala_sekolah/create/index', [kepalaSekolahController::class, 'createIndex']);
-Route::post('/kepala_sekolah/register', [kepalaSekolahController::class, 'register']);
-Route::post('/kepala_sekolah/delete', [kepalaSekolahController::class, 'delete']);
-Route::get('/kepala_sekolah/loginIndex', [kepalaSekolahController::class, 'loginIndex']);
-Route::post('/kepala_sekolah/login', [kepalaSekolahController::class, 'login']);
-Route::get('/kepala_sekolah/logout', [kepalaSekolahController::class, 'logout']);
+Route::get('/kepala-sekolah/index', [kepalaSekolahController::class, 'index']);
+Route::get('/kepala-sekolah/create/index', [kepalaSekolahController::class, 'createIndex']);
+Route::post('/kepala-sekolah/register', [kepalaSekolahController::class, 'register']);
+Route::post('/kepala-sekolah/create', [kepalaSekolahController::class, 'create']);
+Route::get('/kepala-sekolah/delete/{id}', [kepalaSekolahController::class, 'delete']);
+Route::get('/kepala-sekolah/loginIndex', [kepalaSekolahController::class, 'loginIndex']);
+Route::post('/kepala-sekolah/login', [kepalaSekolahController::class, 'login']);
+Route::get('/kepala-sekolah/logout', [kepalaSekolahController::class, 'logout']);

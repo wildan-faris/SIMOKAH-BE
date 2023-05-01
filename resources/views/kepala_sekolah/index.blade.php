@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h3 class="text-center text-secondary">DATA KEPALA</h3>
+    <h3 class="text-center text-secondary">DATA KEPALA SEKOLAH </h3>
     @if ($messege = Session::get('success_delete'))
     <div class="alert alert-danger alert-dismissible " role="alert">
         <strong>{{$messege}}
@@ -41,7 +41,7 @@
 
             <div class="text-right">
                 @if ($len_kepala_sekolah === 0)
-                <a type="button" class="btn btn-primary" href="/kepala_sekolah/create/index">
+                <a type="button" class="btn btn-primary" href="/kepala-sekolah/create/index">
                     <i class="fas fa-user-plus"> </i> Tambah Data
                 </a>
                 @endif
@@ -77,9 +77,9 @@
                             <td class="col-3"><img width="50px" height="50px" src=" {{$dtks->photo_profil}}" alt=""></td>
                             <td>
 
-                                <a href="" data-toggle="modal" data-target="#edit{{$dtks->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit text-white"></i></a>
+                                <!-- <a href="" data-toggle="modal" data-target="#edit{{$dtks->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit text-white"></i></a> -->
 
-                                <a href="/guru/delete/{{$dtks->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                <a href="/kepala-sekolah/delete/{{$dtks->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
 
                             </td>
                         </tr>

@@ -97,9 +97,9 @@
                             </a>
                         </li>
                         @if (session()->get("role") == "admin")
-                        <li class="nav-item {{(request()->is('kepala_sekolah/index')?'bg-secondary':'')}}
-                         {{(request()->is('kepala_sekolah/create/index')?'bg-secondary':'')}}">
-                            <a href="/kepala_sekolah/index" class="nav-link ">
+                        <li class="nav-item {{(request()->is('kepala-sekolah/index')?'bg-secondary':'')}}
+                         {{(request()->is('kepala-sekolah/create/index')?'bg-secondary':'')}}">
+                            <a href="/kepala-sekolah/index" class="nav-link ">
                                 <i class="nav-icon fas fa-user-tie"></i>
                                 <p>
                                     KEPALA SEKOLAH

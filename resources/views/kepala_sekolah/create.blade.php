@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="/kepala_sekolah/register" method="post" enctype="multipart/form-data">
+            <form action="/kepala-sekolah/create" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row mt-3">
                     <div class="col-2">
