@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\orang_tua;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use App\Models\OrangTua;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
@@ -46,9 +47,19 @@ class AuthOrangTuaApiController extends Controller
             'no_hp' => $request->email,
         ]);
 
+        $siswa = Siswa::create([
+            "name" => $request->name_siswa,
+            "nis" => $request->nis_siswa,
+            "jenis_kelamin" => $request->jenis_kelamin_siswa,
+            "tempat_lahir" => $request->tempat_lahir_siswa,
+            "tanggal_lahir" => $request->tanggal_lahir_siswa,
+            "orang_tua_id" => $orang_tua->id,
+            "kelas_id" => $request->kelas_id
+        ]);
+
 
         return response()
-            ->json(['data' => $orang_tua, 'token_type' => 'Bearer',]);
+            ->json(['data' => $orang_tua, 'token_type' => 'Bearer', 'data_anak' => $siswa]);
     }
 
     public function login(Request $request)

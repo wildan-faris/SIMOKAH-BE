@@ -45,7 +45,7 @@
                         <div class=""><i class="fas fa-sign-out-alt"></i> Logout</div>
                     </a>
                     @elseif (session()->get('role') === "kepala sekolah")
-                    <a href="/kepala_sekolah/logout" class="text-white">
+                    <a href="/kepala-sekolah/logout" class="text-white">
                         <div class=""><i class="fas fa-sign-out-alt"></i> Logout</div>
                     </a>
                     @endif
