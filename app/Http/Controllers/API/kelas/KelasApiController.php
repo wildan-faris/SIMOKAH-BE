@@ -52,7 +52,7 @@ class KelasApiController extends Controller
             return response()->json([
                 'message' => 'Failed create data',
                 'error' => $th
-            ],);
+            ], 500);
         }
     }
 
@@ -76,7 +76,7 @@ class KelasApiController extends Controller
             return response()->json([
                 'message' => 'Failed create data',
                 'error' => $th
-            ]);
+            ], 500);
         }
     }
 
@@ -89,7 +89,7 @@ class KelasApiController extends Controller
             return response()->json([
                 'message' => 'Failed delete data',
                 'error' => $th
-            ]);
+            ], 500);
         }
     }
 }

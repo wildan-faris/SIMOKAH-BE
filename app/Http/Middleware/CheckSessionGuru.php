@@ -7,7 +7,7 @@ use App\Models\OrangTua;
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckBearerToken
+class CheckSessionGuru
 {
     /**
      * Handle an incoming request.
@@ -19,7 +19,18 @@ class CheckBearerToken
     public function handle(Request $request, Closure $next)
     {
 
+        $guru = Guru::where("remember_token", session()->get("user_token"))->first();
+        if ($guru == null) {
 
+            $orang_tua = OrangTua::where("remember_token", session()->get("user_token"))->first();
+
+            if ($orang_tua == null) {
+                return response()->json([
+                    'message' => 'invalid token',
+
+                ]);
+            }
+        }
 
         return $next($request);
     }

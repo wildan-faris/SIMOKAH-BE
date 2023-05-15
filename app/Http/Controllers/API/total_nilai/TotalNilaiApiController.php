@@ -10,57 +10,80 @@ class TotalNilaiApiController extends Controller
 {
     public function getAll()
     {
-        $total_nilai = TotalNilai::with("siswa")->with("aktivitas")->with("sub_aktivitas")->get();
+
+        try {
+
+            $total_nilai = TotalNilai::with("siswa")->with("aktivitas")->with("sub_aktivitas")->get();
 
 
-        return response()->json([
-            'message' => 'Success get all data',
-            'data' => $total_nilai,
+            return response()->json([
+                'message' => 'Success get all data',
+                'data' => $total_nilai,
 
-        ], 200);
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Failed get all data', 'error' => $th], 500);
+        }
     }
     public function getById($id)
     {
-        $total_nilai = TotalNilai::with("siswa")->with("aktivitas")->with("sub_aktivitas")->where("id", $id)->first();
 
-        if ($total_nilai == null) {
+        try {
+
+            $total_nilai = TotalNilai::with("siswa")->with("aktivitas")->with("sub_aktivitas")->where("id", $id)->first();
+
+            if ($total_nilai == null) {
+                return response()->json([
+                    "message" => "data not found",
+
+                ]);
+            }
+
             return response()->json([
-                "message" => "data not found",
-
+                "message" => "Success get data by id",
+                "data" => $total_nilai
             ]);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Failed get data by id', 'error' => $th], 500);
         }
-
-        return response()->json([
-            "message" => "Success get data by id",
-            "data" => $total_nilai
-        ]);
     }
     public function getBySiswaAndAktivitas(Request $request)
     {
-        $total_nilai = TotalNilai::with("siswa")->with("aktivitas")->with("sub_aktivitas")->where("siswa_id", $request->siswa_id)->where("aktivitas_id", $request->aktivitas_id)->get();
+        try {
+
+            $total_nilai = TotalNilai::with("siswa")->with("aktivitas")->with("sub_aktivitas")->where("siswa_id", $request->siswa_id)->where("aktivitas_id", $request->aktivitas_id)->get();
 
 
 
-        return response()->json([
-            "message" => "Success get data by id",
-            "data" => $total_nilai
-        ]);
+            return response()->json([
+                "message" => "Success get data by siswa and aktivitas id",
+                "data" => $total_nilai
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Failed get data by siswa and aktivitas id', 'error' => $th], 500);
+        }
     }
 
 
     public function create(Request $request)
     {
-        TotalNilai::create([
-            "aktivitas_id" => $request->aktivitas_id,
-            "name" => $request->name,
-        ]);
 
-        $total_nilai = TotalNilai::get()->last();
+        try {
 
-        return response()->json([
-            "message" => "Success create data",
-            "data" => $total_nilai
-        ]);
+            TotalNilai::create([
+                "aktivitas_id" => $request->aktivitas_id,
+                "name" => $request->name,
+            ]);
+
+            $total_nilai = TotalNilai::get()->last();
+
+            return response()->json([
+                "message" => "Success create data",
+                "data" => $total_nilai
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Failed create data', 'error' => $th], 500);
+        }
     }
 
     public function update($id, Request $request)
@@ -75,16 +98,22 @@ class TotalNilaiApiController extends Controller
                 "message" => "Success update data"
             ]);
         } catch (\Throwable $th) {
-            return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
+            return response()->json(['status' => 'error', 'Failed update data' => $th->getMessage()]);
         }
     }
 
     public function delete($id)
     {
-        TotalNilai::where("id", $id)->delete();
 
-        return response()->json([
-            "message" => "Success delete data"
-        ]);
+        try {
+
+            TotalNilai::where("id", $id)->delete();
+
+            return response()->json([
+                "message" => "Success delete data"
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'error', 'Failed delete data' => $th->getMessage()]);
+        }
     }
 }

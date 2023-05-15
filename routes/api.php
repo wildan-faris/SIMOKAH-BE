@@ -62,7 +62,7 @@ Route::get('/login', [Controller::class, 'CheckToken'])->name('checktoken');
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::prefix('user')->middleware('auth.bearer')->group(function () {
+    Route::prefix('user')->middleware('auth.guru.session')->group(function () {
 
         Route::post('/logout', [UserController::class, 'logout']);
         Route::get('/get-profil/{id}', [UserController::class, 'GetProfil']);
@@ -77,7 +77,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
 
 
-    Route::prefix('orang-tua')->middleware('auth.bearer')->group(function () {
+    Route::prefix('orang-tua')->middleware('auth.guru.session')->group(function () {
 
         Route::post('/logout', [AuthOrangTuaApiController::class, 'logout']);
         Route::get('/{id}', [OrangTuaApiController::class, 'getProfil']);
@@ -85,7 +85,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/photo-edit/{id}', [OrangTuaApiController::class, 'editPhoto']);
         Route::post('/photo-delete/{id}', [OrangTuaApiController::class, 'deletePhoto']);
     });
-    Route::prefix('guru')->middleware('auth.bearer')->group(function () {
+    Route::prefix('guru')->middleware('auth.guru.session')->group(function () {
 
         Route::post('/logout', [AuthGuruApiController::class, 'logout']);
         Route::get('/{id}', [GuruApiController::class, 'getProfil']);
@@ -95,7 +95,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
 
 
-    Route::prefix('kelas')->middleware('auth.bearer')->group(function () {
+    Route::prefix('kelas')->middleware('auth.guru.session')->group(function () {
 
 
         Route::get('/{id}', [KelasApiController::class, 'getById']);
@@ -103,7 +103,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::put('/{id}', [KelasApiController::class, 'update']);
         Route::delete('/{id}', [KelasApiController::class, 'delete']);
     });
-    Route::prefix('siswa')->middleware('auth.bearer')->group(function () {
+    Route::prefix('siswa')->middleware('auth.guru.session')->group(function () {
 
         Route::get('/', [SiswaApiController::class, 'getAll']);
         Route::get('/{id}', [SiswaApiController::class, 'getById']);
@@ -111,7 +111,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::put('/{id}', [SiswaApiController::class, 'update']);
         Route::delete('/{id}', [SiswaApiController::class, 'delete']);
     });
-    Route::prefix('aktivitas')->middleware('auth.bearer')->group(function () {
+    Route::prefix('aktivitas')->middleware('auth.guru.session')->group(function () {
 
         Route::get('/', [AktivitasApiController::class, 'getAll']);
         Route::get('/{id}', [AktivitasApiController::class, 'getById']);
@@ -119,7 +119,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::put('/{id}', [AktivitasApiController::class, 'update']);
         Route::delete('/{id}', [AktivitasApiController::class, 'delete']);
     });
-    Route::prefix('sub-aktivitas')->middleware('auth.bearer')->group(function () {
+    Route::prefix('sub-aktivitas')->middleware('auth.guru.session')->group(function () {
 
         Route::get('/', [SubAktivitasApiController::class, 'getAll']);
         Route::get('/{id}', [SubAktivitasApiController::class, 'getById']);
@@ -128,7 +128,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::put('/{id}', [SubAktivitasApiController::class, 'update']);
         Route::delete('/{id}', [SubAktivitasApiController::class, 'delete']);
     });
-    Route::prefix('nilai')->middleware('auth.bearer')->group(function () {
+    Route::prefix('nilai')->middleware('auth.guru.session')->group(function () {
 
         Route::get('/', [NilaiAPIController::class, 'getAll']);
         Route::get('/{id}', [NilaiAPIController::class, 'getById']);
@@ -138,7 +138,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::put('/{id}', [NilaiAPIController::class, 'update']);
         Route::delete('/{id}', [NilaiAPIController::class, 'delete']);
     });
-    Route::prefix('total-nilai')->middleware('auth.bearer')->group(function () {
+    Route::prefix('total-nilai')->middleware('auth.guru.session')->group(function () {
 
         Route::get('/', [TotalNilaiApiController::class, 'getAll']);
         Route::get('/{id}', [TotalNilaiApiController::class, 'getById']);
