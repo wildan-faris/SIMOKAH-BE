@@ -22,4 +22,13 @@ class TotalNilai extends Model
     {
         return $this->belongsTo(Siswa::class);
     }
+
+    public function aktivitas()
+    {
+        return $this->belongsTo(Aktivitas::class);
+    }
+    public function sub_aktivitas()
+    {
+        return $this->belongsTo(SubAktivitas::class);
+    }
 }

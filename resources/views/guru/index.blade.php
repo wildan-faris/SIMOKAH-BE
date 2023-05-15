@@ -77,7 +77,7 @@
 
                                 <a href="" data-toggle="modal" data-target="#edit{{$dtg->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit text-white"></i></a>
 
-                                <a href="/guru/delete/{{$dtg->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                <a href="/guru/delete/{{$dtg->id}}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
 
                             </td>
                         </tr>

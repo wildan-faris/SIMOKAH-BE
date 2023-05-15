@@ -19,9 +19,11 @@ class CreateNilaisTable extends Migration
             $table->date("tanggal");
             $table->string("penilai");
             $table->unsignedBigInteger("siswa_id");
-            $table->foreign("siswa_id")->references("id")->on("siswas");
+            $table->foreign("siswa_id")->references("id")->on("siswas")->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->unsignedBigInteger("sub_aktivitas_id");
-            $table->foreign("sub_aktivitas_id")->references("id")->on("sub_aktivitas");
+            $table->foreign("sub_aktivitas_id")->references("id")->on("sub_aktivitas")->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->timestamps();
         });

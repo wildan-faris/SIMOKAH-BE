@@ -10,7 +10,7 @@ class TotalNilaiApiController extends Controller
 {
     public function getAll()
     {
-        $total_nilai = TotalNilai::with("siswa")->get();
+        $total_nilai = TotalNilai::with("siswa")->with("aktivitas")->with("sub_aktivitas")->get();
 
 
         return response()->json([
@@ -21,7 +21,7 @@ class TotalNilaiApiController extends Controller
     }
     public function getById($id)
     {
-        $total_nilai = TotalNilai::where("id", $id)->first();
+        $total_nilai = TotalNilai::with("siswa")->with("aktivitas")->with("sub_aktivitas")->where("id", $id)->first();
 
         if ($total_nilai == null) {
             return response()->json([
@@ -37,7 +37,7 @@ class TotalNilaiApiController extends Controller
     }
     public function getBySiswaAndAktivitas(Request $request)
     {
-        $total_nilai = TotalNilai::where("siswa_id", $request->siswa_id)->where("aktivitas_id", $request->aktivitas_id)->get();
+        $total_nilai = TotalNilai::with("siswa")->with("aktivitas")->with("sub_aktivitas")->where("siswa_id", $request->siswa_id)->where("aktivitas_id", $request->aktivitas_id)->get();
 
 
 

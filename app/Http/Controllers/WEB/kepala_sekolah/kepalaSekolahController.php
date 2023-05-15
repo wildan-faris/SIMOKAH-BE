@@ -94,7 +94,7 @@ class kepalaSekolahController extends Controller
     public function delete($id)
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
         KepalaSekolah::where("id", $id)->delete();
         return redirect('/kepala-sekolah/index')->with("success_delete", "Berhasil Menghapus Data");

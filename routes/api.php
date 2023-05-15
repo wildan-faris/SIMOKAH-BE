@@ -54,6 +54,8 @@ Route::prefix('user')->group(function () {
 });
 
 
+Route::get('/kelas', [KelasApiController::class, 'getAll']);
+
 // API route for logout user
 
 Route::get('/login', [Controller::class, 'CheckToken'])->name('checktoken');
@@ -95,7 +97,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::prefix('kelas')->middleware('auth.bearer')->group(function () {
 
-        Route::get('/', [KelasApiController::class, 'getAll']);
+
         Route::get('/{id}', [KelasApiController::class, 'getById']);
         Route::post('/', [KelasApiController::class, 'create']);
         Route::put('/{id}', [KelasApiController::class, 'update']);

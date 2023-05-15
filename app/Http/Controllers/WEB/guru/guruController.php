@@ -12,7 +12,7 @@ class guruController extends Controller
     public function index()
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
 
         $data_guru = Guru::get();
@@ -21,7 +21,7 @@ class guruController extends Controller
     public function createIndex()
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
         return view('guru.create');
     }
@@ -29,7 +29,7 @@ class guruController extends Controller
     public function create(Request $request)
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
         $get_guru = Guru::where("email", $request->email)->first();
         if ($get_guru !== null) {
@@ -47,7 +47,7 @@ class guruController extends Controller
     public function edit(Request $request)
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
         Guru::where("id", $request->id)->update([
             'name' => $request->name,
@@ -61,7 +61,7 @@ class guruController extends Controller
     public function delete($id)
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
         Guru::where("id", $id)->delete();
         return redirect('/guru/index')->with("success_delete", "Berhasil Menghapus Data");

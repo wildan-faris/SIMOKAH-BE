@@ -16,7 +16,7 @@ class kelasController extends Controller
     public function index()
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
 
         $data_kelas = Kelas::with("guru")->with("siswa")->get();
@@ -28,7 +28,7 @@ class kelasController extends Controller
     {
 
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
         $data_guru = Guru::get();
         return view('kelas.create', compact("data_guru"));
@@ -37,7 +37,7 @@ class kelasController extends Controller
     public function create(Request $request)
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
 
         Kelas::insert([
@@ -50,7 +50,7 @@ class kelasController extends Controller
     public function edit(Request $request)
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
 
         Kelas::where("id", $request->id)->update([
@@ -64,7 +64,7 @@ class kelasController extends Controller
     public function delete($id)
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
 
         Kelas::where("id", $id)->delete();
@@ -75,7 +75,7 @@ class kelasController extends Controller
     {
 
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
 
         $data_siswa = Siswa::where("kelas_id", $id)->get();
@@ -94,7 +94,7 @@ class kelasController extends Controller
     {
 
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
         $data_siswa = Siswa::where("id", $id)->first();
 

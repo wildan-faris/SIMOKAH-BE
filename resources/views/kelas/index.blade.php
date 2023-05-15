@@ -57,7 +57,7 @@
                         <tr>
                             <th>No</th>
                             <th>Name</th>
-
+                            <th>Guru</th>
                             <th>Aksi</th>
 
                         </tr>
@@ -70,12 +70,13 @@
                         <tr class="text-center fw-normal">
                             <td>{{$no++}} </td>
                             <td>{{$dtk->name}}</td>
+                            <td>{{$dtk->guru->name}}</td>
 
                             <td>
 
                                 <a href="" data-toggle="modal" data-target="#edit{{$dtk->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit text-white"></i></a>
 
-                                <a href="/kelas/delete/{{$dtk->id}}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                <a href="/kelas/delete/{{$dtk->id}}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
 
                             </td>
                         </tr>

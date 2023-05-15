@@ -54,9 +54,6 @@
 
     <!-- /.social-auth-links -->
 
-    <div class="mt-1">
-        <p>Belum Memiliki akun? <a href="/kepala-sekolah/registerIndex">Register</a></p>
-    </div>
 
 </div>
 
