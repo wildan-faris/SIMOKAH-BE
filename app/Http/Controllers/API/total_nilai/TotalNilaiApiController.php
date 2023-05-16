@@ -71,8 +71,11 @@ class TotalNilaiApiController extends Controller
         try {
 
             TotalNilai::create([
-                "aktivitas_id" => $request->aktivitas_id,
-                "name" => $request->name,
+                "siswa_id" => $request->siswa_id,
+                "sub_aktivitas_id" => $request->sub_aktivitas_id,
+                "nilai" => $request->nilai,
+                "penilai" => $request->penilai,
+                "tanggal" => $request->tanggal,
             ]);
 
             $total_nilai = TotalNilai::get()->last();
@@ -90,8 +93,11 @@ class TotalNilaiApiController extends Controller
     {
         try {
             TotalNilai::where("id", $id)->update([
-                "aktivitas_id" => $request->aktivitas_id,
-                "name" => $request->name,
+                "siswa_id" => $request->siswa_id,
+                "sub_aktivitas_id" => $request->sub_aktivitas_id,
+                "nilai" => $request->nilai,
+                "penilai" => $request->penilai,
+                "tanggal" => $request->tanggal,
             ]);
 
             return response()->json([

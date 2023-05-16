@@ -14,6 +14,7 @@ use App\Http\Controllers\API\orang_tua\OrangTuaApiController;
 use App\Http\Controllers\API\siswa\SiswaApiController;
 use App\Http\Controllers\API\sub_aktivitas\SubAktivitasApiController;
 use App\Http\Controllers\API\total_nilai\TotalNilaiApiController;
+use App\Http\Controllers\API\total_nilai_bulan\TotalNilaiBulanController;
 use App\Http\Controllers\Controller;
 
 /*
@@ -132,7 +133,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
         Route::get('/', [NilaiAPIController::class, 'getAll']);
         Route::get('/{id}', [NilaiAPIController::class, 'getById']);
-
         Route::get('/sub-aktivitas/siswa', [NilaiAPIController::class, 'getBySiswaAndSubAktivitas']);
         Route::post('/', [NilaiAPIController::class, 'create']);
         Route::put('/{id}', [NilaiAPIController::class, 'update']);
@@ -143,8 +143,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/', [TotalNilaiApiController::class, 'getAll']);
         Route::get('/{id}', [TotalNilaiApiController::class, 'getById']);
         Route::get('/siswa/aktivitas', [TotalNilaiApiController::class, 'getBySiswaAndAktivitas']);
-        Route::post('/', [TotalNilaiApiController::class, 'create']);
-        Route::put('/{id}', [TotalNilaiApiController::class, 'update']);
         Route::delete('/{id}', [TotalNilaiApiController::class, 'delete']);
+    });
+
+    Route::prefix('total-nilai-bulan')->middleware('auth.guru.session')->group(function () {
+
+        Route::get('/', [TotalNilaiBulanController::class, 'getAll']);
+        Route::get('/{id}', [TotalNilaiBulanController::class, 'getById']);
+        Route::get('/siswa/aktivitas', [TotalNilaiBulanController::class, 'getBySiswaAndAktivitas']);
+        Route::post('/', [TotalNilaiBulanController::class, 'create']);
     });
 });
