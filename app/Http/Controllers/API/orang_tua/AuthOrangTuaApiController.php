@@ -47,7 +47,7 @@ class AuthOrangTuaApiController extends Controller
                 'photo_profil' => "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png",
                 'pekerjaan' => $request->pekerjaan,
                 'alamat' => $request->alamat,
-                'no_hp' => $request->email,
+                'no_hp' => $request->no_hp,
             ]);
 
             $siswa = Siswa::create([
