@@ -12,7 +12,7 @@ class AhliParentingController extends Controller
     public function index()
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
 
         $data_ahli_parenting = AhliParenting::get();
@@ -21,7 +21,7 @@ class AhliParentingController extends Controller
     public function createIndex()
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
         return view('ahli_parenting.create');
     }
@@ -29,7 +29,7 @@ class AhliParentingController extends Controller
     public function create(Request $request)
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
         $get_ahli_parenting = AhliParenting::where("email", $request->email)->first();
         if ($get_ahli_parenting !== null) {
@@ -46,7 +46,7 @@ class AhliParentingController extends Controller
     public function edit(Request $request)
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
         AhliParenting::where("id", $request->id)->update([
             'name' => $request->name,
@@ -59,7 +59,7 @@ class AhliParentingController extends Controller
     public function delete($id)
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/lol")->with("failed", "anda belum login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
         AhliParenting::where("id", $id)->delete();
         return redirect('/ahli-parenting/index')->with("success_delete", "Berhasil Menghapus Data");

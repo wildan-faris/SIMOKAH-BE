@@ -21,10 +21,14 @@ class CreateTotalNilaisTable extends Migration
             $table->unsignedBigInteger("kelas_id");
             $table->float("nilai");
             $table->date("tanggal");
-            $table->foreign("siswa_id")->references("id")->on("siswas");
-            $table->foreign("sub_aktivitas_id")->references("id")->on("sub_aktivitas");
-            $table->foreign("aktivitas_id")->references("id")->on("aktivitas");
-            $table->foreign("kelas_id")->references("id")->on("kelas");
+            $table->foreign("siswa_id")->references("id")->on("siswas")->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign("sub_aktivitas_id")->references("id")->on("sub_aktivitas")->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign("aktivitas_id")->references("id")->on("aktivitas")->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign("kelas_id")->references("id")->on("kelas")->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }

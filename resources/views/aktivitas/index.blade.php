@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h3 class="text-center text-secondary">DATA ahli-parenting</h3>
+    <h3 class="text-center text-secondary">DATA AKTIVITAS</h3>
     @if ($messege = Session::get('success_delete'))
     <div class="alert alert-danger alert-dismissible " role="alert">
         <strong>{{$messege}}
@@ -30,6 +30,8 @@
     </div>
     @endif
 
+    <!-- session untuk admin -->
+    @if (session()->get("role") == "admin")
     <div class="card">
         <div class="card-header">
             <div class="text-left">
@@ -40,8 +42,8 @@
             </div>
 
             <div class="text-right">
-                <a type="button" class="btn btn-primary" href="/ahli-parenting/create/index">
-                    <i class="fas fa-user-plus"> </i> Tambah Data
+                <a type="button" class="btn btn-primary" href="/aktivitas/create/index">
+                    <i class="fas fa-plus"></i> Tambah Data
                 </a>
             </div>
 
@@ -55,8 +57,6 @@
                         <tr>
                             <th>No</th>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>Foto</th>
                             <th>Aksi</th>
 
                         </tr>
@@ -65,18 +65,15 @@
                         @php
                         $no =1;
                         @endphp
-                        @foreach ($data_ahli_parenting as $dtap)
+                        @foreach ($data_aktivitas as $dta)
                         <tr class="text-center fw-normal">
                             <td>{{$no++}} </td>
-                            <td>{{$dtap->name}}</td>
+                            <td>{{$dta->name}}</td>
 
-                            <td>{{$dtap->email}}</td>
-                            <td class="col-3"><img width="50px" height="50px" src=" {{$dtap->photo_profil}}" alt=""></td>
                             <td>
-
-                                <a href="" data-toggle="modal" data-target="#edit{{$dtap->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit text-white"></i></a>
-
-                                <a href="/ahli-parenting/delete/{{$dtap->id}}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                <a href="/sub-aktivitas/index/{{$dta->id}}" class="btn btn-sm btn-primary"><i class="fas fa-table-tennis"></i></a>
+                                <a href="" data-toggle="modal" data-target="#edit{{$dta->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit text-white"></i></a>
+                                <a href="/aktivitas/delete/{{$dta->id}}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
 
                             </td>
                         </tr>
@@ -91,8 +88,8 @@
     </div>
 
     <!-- modal edit data -->
-    @foreach ($data_ahli_parenting as $dtap)
-    <div class="modal fade" id="edit{{$dtap->id}}">
+    @foreach ($data_aktivitas as $dta)
+    <div class="modal fade" id="edit{{$dta->id}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -102,21 +99,16 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="/ahli-parenting/edit" method="post">
+                    <form action="/aktivitas/edit" method="post">
                         @csrf
-                        <input name="id" type="hidden" value="{{$dtap->id}}">
+                        <input name="id" type="hidden" value="{{$dta->id}}">
                         <div class="row mt-3">
                             <div class="col-2">
                                 <label for="" class="form-label">Name</label>
                             </div>
-                            <div class="col-8"><input value="{{$dtap->name}}" name="name" class="form-control" type="text" required></div>
+                            <div class="col-8"><input value="{{$dta->name}}" name="name" class="form-control" type="text" required></div>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-2">
-                                <label for="" class="form-label">Email</label>
-                            </div>
-                            <div class="col-8"><input value="{{$dtap->email}}" name="email" class="form-control" type="email" required></div>
-                        </div>
+
 
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -130,6 +122,38 @@
         <!-- /.modal-dialog -->
     </div>
     @endforeach
+    <!--  end session untuk admin -->
+    @else
+    @endif
+
+
+    <!-- session untuk kepala sekolah -->
+    @if (session()->get("role") == "kepala sekolah")
+
+
+    <div class="row">
+        @foreach ($data_aktivitas as $dta)
+
+
+        <div class="col-md-3 col-sm-6 col-12">
+            <a href="/aktivitas/view/{{$dta->id}}">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="nav-icon fas fa-users"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">{{$dta->name}}</span>
+                        <span class="info-box-number">{{count($dta->siswa)}} Siswa</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </a>
+        </div>
+
+        @endforeach
+    </div>
+    @endif
+    <!-- end session untuk kepala sekolah -->
 
 </div>
 @endsection

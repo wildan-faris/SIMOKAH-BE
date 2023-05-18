@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubAktivitasTable extends Migration
+class CreateBulansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateSubAktivitasTable extends Migration
      */
     public function up()
     {
-        Schema::create('sub_aktivitas', function (Blueprint $table) {
+        Schema::create('bulans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("aktivitas_id");
-            $table->foreign("aktivitas_id")->references("id")->on("aktivitas")->onDelete('cascade')
-                ->onUpdate('cascade');
-            $table->string("name");
+            $table->string("bulan");
+            $table->integer("tahun");
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateSubAktivitasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_aktivitas');
+        Schema::dropIfExists('bulans');
     }
 }

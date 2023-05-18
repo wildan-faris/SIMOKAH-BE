@@ -38,6 +38,11 @@ class OrangTua extends Authenticatable
         'remember_token',
     ];
 
+    public function siswa()
+    {
+        return $this->hasMany(Siswa::class);
+    }
+
     /**
      * The attributes that should be cast.
      *

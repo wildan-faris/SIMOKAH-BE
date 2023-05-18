@@ -14,7 +14,7 @@ class AktivitasApiController extends Controller
             $aktivitas = Aktivitas::with("sub_aktivitas")->get();
             return response()->json(['message' => 'Success get all data ', 'data' => $aktivitas], 200);
         } catch (\Throwable $th) {
-            return response()->json(['message' => 'Failed get all data ', 'data' => $th]);
+            return response()->json(['message' => 'Failed get all data ', 'data' => $th], 500);
         }
     }
     public function getById($id)
@@ -28,7 +28,7 @@ class AktivitasApiController extends Controller
 
             return response()->json(['message' => 'Success get data by id', 'data' => $aktivitas], 200);
         } catch (\Throwable $th) {
-            return response()->json(['message' => 'Failed get data by id', 'data' => $th]);
+            return response()->json(['message' => 'Failed get data by id', 'data' => $th], 500);
         }
     }
 
@@ -46,7 +46,7 @@ class AktivitasApiController extends Controller
 
             return response()->json(['message' => 'Success create data', 'data' => $get], 201);
         } catch (\Throwable $th) {
-            return response()->json(['message' => 'Failed create data', 'data' => $th]);
+            return response()->json(['message' => 'Failed create data', 'data' => $th], 500);
         }
     }
 
@@ -62,7 +62,7 @@ class AktivitasApiController extends Controller
 
             return response()->json(['message' => 'Success edit data',], 200);
         } catch (\Throwable $th) {
-            return response()->json(['message' => 'Failed edit data', 'data' => $th]);
+            return response()->json(['message' => 'Failed edit data', 'data' => $th], 500);
         }
     }
 
@@ -72,7 +72,7 @@ class AktivitasApiController extends Controller
             Aktivitas::where("id", $id)->delete();
             return response()->json(['message' => 'Success delete data',], 201);
         } catch (\Throwable $th) {
-            return response()->json(['message' => 'Failed delete data', 'data' => $th]);
+            return response()->json(['message' => 'Failed delete data', 'data' => $th], 500);
         }
     }
 }

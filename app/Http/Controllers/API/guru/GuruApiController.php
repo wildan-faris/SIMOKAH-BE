@@ -13,7 +13,11 @@ class GuruApiController extends Controller
     public function getProfil($id)
     {
 
+
         try {
+
+
+
             $guru = Guru::where("id", $id)->first();
 
             if ($guru == null) {
@@ -21,7 +25,7 @@ class GuruApiController extends Controller
                     'message' => 'data guru tidak ada',
 
 
-                ]);
+                ], 404);
             }
 
             return response()->json([
@@ -34,7 +38,7 @@ class GuruApiController extends Controller
                 'message' => 'failed get user by id',
                 'error' => $th,
 
-            ]);
+            ], 500);
         }
     }
     public function editProfil($id, Request $request)
@@ -66,7 +70,7 @@ class GuruApiController extends Controller
             return response()->json([
                 'message' => 'failed update data user',
                 "error" => $th
-            ]);
+            ], 500);
         }
     }
 
@@ -101,7 +105,7 @@ class GuruApiController extends Controller
             return response()->json([
                 'message' => "failed edit photo profil",
                 'error' => $th
-            ]);
+            ], 500);
         }
     }
 
@@ -122,7 +126,7 @@ class GuruApiController extends Controller
             return response()->json([
                 'message' => "failed delete photo profil",
                 'error' => $th
-            ]);
+            ], 500);
         }
     }
 

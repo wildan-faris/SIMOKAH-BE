@@ -20,7 +20,7 @@ class KelasApiController extends Controller
     public function getById($id)
     {
         try {
-            $kelas = Kelas::where("id", $id)->first();
+            $kelas = Kelas::where("id", $id)->with("siswa")->with("guru")->first();
 
             if ($kelas == null) {
                 return response()->json(['message' => 'data not found'], 404);
@@ -52,7 +52,7 @@ class KelasApiController extends Controller
             return response()->json([
                 'message' => 'Failed create data',
                 'error' => $th
-            ],);
+            ], 500);
         }
     }
 
@@ -74,9 +74,9 @@ class KelasApiController extends Controller
             ], 201);
         } catch (\Throwable $th) {
             return response()->json([
-                'message' => 'Failed edit data',
+                'message' => 'Failed create data',
                 'error' => $th
-            ]);
+            ], 500);
         }
     }
 
@@ -89,7 +89,7 @@ class KelasApiController extends Controller
             return response()->json([
                 'message' => 'Failed delete data',
                 'error' => $th
-            ]);
+            ], 500);
         }
     }
 }

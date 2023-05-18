@@ -38,7 +38,21 @@ class kepalaSekolahController extends Controller
             'photo_profil' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'
         ]);
 
-        return redirect("/kepala_sekolah/index")->with("success_create", "Berhasil Mendaftar");
+        return redirect("/kepala-sekolah/index")->with("success_create", "Berhasil Mendaftar");
+    }
+    public function create(Request $request)
+    {
+
+
+        KepalaSekolah::insert([
+            "name" => $request->name,
+            "email" => $request->email,
+            "password" => Hash::make($request->password),
+            'remember_token' => Str::random(60),
+            'photo_profil' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'
+        ]);
+
+        return redirect("/kepala-sekolah/index")->with("success_create", "Berhasil Mendaftar");
     }
     public function login(Request $request)
     {
@@ -47,7 +61,7 @@ class kepalaSekolahController extends Controller
 
         if ($data == null) {
 
-            return redirect("/kepala_sekolah/loginIndex")->with("failed", "gagal login");
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "gagal login");
         }
 
         if (Hash::check($request->password, $data->password)) {
@@ -64,7 +78,7 @@ class kepalaSekolahController extends Controller
 
 
 
-        return redirect("/kepala_sekolah/loginIndex")->with("failed", "gagal login");
+        return redirect("/kepala-sekolah/loginIndex")->with("failed", "gagal login");
     }
 
     public function logout(Request $request)
@@ -73,6 +87,16 @@ class kepalaSekolahController extends Controller
             return redirect("/loginIndex")->with("failed", "gagal login");
         }
         $request->session()->flush();
-        return redirect("/kepala_sekolah/loginIndex")->with("success", "berhasil logout");
+        return redirect("/kepala-sekolah/loginIndex")->with("success", "berhasil logout");
+    }
+
+
+    public function delete($id)
+    {
+        if (session()->get("remember_token") == "") {
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
+        }
+        KepalaSekolah::where("id", $id)->delete();
+        return redirect('/kepala-sekolah/index')->with("success_delete", "Berhasil Menghapus Data");
     }
 }

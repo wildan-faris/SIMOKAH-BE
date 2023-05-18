@@ -21,9 +21,11 @@ class CreateSiswasTable extends Migration
             $table->string("tempat_lahir");
             $table->date("tanggal_lahir");
             $table->unsignedBigInteger("orang_tua_id");
-            $table->foreign("orang_tua_id")->references("id")->on("orang_tuas");
+            $table->foreign("orang_tua_id")->references("id")->on("orang_tuas")->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->unsignedBigInteger("kelas_id");
-            $table->foreign("kelas_id")->references("id")->on("kelas");
+            $table->foreign("kelas_id")->references("id")->on("kelas")->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }

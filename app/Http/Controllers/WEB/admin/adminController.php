@@ -31,6 +31,8 @@ class adminController extends Controller
             'photo_profil' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'
         ]);
 
+
+
         return redirect("/admin/loginIndex")->with("success", "Berhasil Mendaftar");
     }
     public function login(Request $request)
@@ -44,7 +46,9 @@ class adminController extends Controller
         }
 
         if (Hash::check($request->password, $data->password)) {
-
+            Admin::where("id", $data->id)->update([
+                'remember_token' => Str::random(60),
+            ]);
             $request->session()->put('name', $data->name);
             $request->session()->put('role', "admin");
 

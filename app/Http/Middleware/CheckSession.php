@@ -2,12 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Guru;
-use App\Models\OrangTua;
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckBearerToken
+class CheckSession
 {
     /**
      * Handle an incoming request.
@@ -18,9 +16,6 @@ class CheckBearerToken
      */
     public function handle(Request $request, Closure $next)
     {
-
-
-
         return $next($request);
     }
 }

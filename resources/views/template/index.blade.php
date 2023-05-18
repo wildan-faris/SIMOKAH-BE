@@ -23,12 +23,12 @@
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand  navbar-light" style=" background-color:#52A67E;">
             <!-- Left navbar links -->
-            <ul class="navbar-nav">
+            <!-- <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link text-white" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
 
-            </ul>
+            </ul> -->
             <div class="ml-5"></div>
             <div class="ml-5"></div>
             <div class="ml-5"></div>
@@ -45,7 +45,7 @@
                         <div class=""><i class="fas fa-sign-out-alt"></i> Logout</div>
                     </a>
                     @elseif (session()->get('role') === "kepala sekolah")
-                    <a href="/kepala_sekolah/logout" class="text-white">
+                    <a href="/kepala-sekolah/logout" class="text-white">
                         <div class=""><i class="fas fa-sign-out-alt"></i> Logout</div>
                     </a>
                     @endif
@@ -65,22 +65,14 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-white-success elevation-2 bg-white ">
             <!-- Brand Logo -->
-            <a href="../index3.html" class="brand-link ">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text text-dark text-bold">PHAS</span>
+            <a class="brand-link text-center">
+                <img src="{{asset('logo.png')}}" alt="Logo" width="100px">
+
             </a>
             <hr>
             <div class="sidebar">
 
-                <div class="user-panel  pb-2  d-flex ">
-                    <div class="image">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" class="img-circle elevation-2" alt="User Image">
-                    </div>
-                    <div class="info">
-                        <h4 href="#" class="d-block text-dark text-bold">{{session()->get('role')}}</h4>
-                    </div>
-                </div>
-                <hr>
+
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-1">
@@ -97,9 +89,8 @@
                             </a>
                         </li>
                         @if (session()->get("role") == "admin")
-                        <li class="nav-item {{(request()->is('kepala_sekolah/index')?'bg-secondary':'')}}
-                         {{(request()->is('kepala_sekolah/create/index')?'bg-secondary':'')}}">
-                            <a href="/kepala_sekolah/index" class="nav-link ">
+                        <li class="nav-item {{(request()->is('kepala-sekolah/*')?'bg-secondary':'')}}">
+                            <a href="/kepala-sekolah/index" class="nav-link ">
                                 <i class="nav-icon fas fa-user-tie"></i>
                                 <p>
                                     KEPALA SEKOLAH
@@ -109,8 +100,7 @@
                         </li>
 
 
-                        <li class="nav-item {{(request()->is('guru/index')?'bg-secondary':'')}} 
-                        {{(request()->is('guru/create/index')?'bg-secondary':'')}}">
+                        <li class="nav-item {{(request()->is('guru/*')?'bg-secondary':'')}}">
                             <a href="/guru/index" class="nav-link ">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
@@ -119,8 +109,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item {{(request()->is('ahli-parenting/index')?'bg-secondary':'')}} 
-                        {{(request()->is('ahli-parenting/create/index')?'bg-secondary':'')}}">
+                        <li class="nav-item {{(request()->is('ahli-parenting/*')?'bg-secondary':'')}} ">
                             <a href="/ahli-parenting/index" class="nav-link ">
 
                                 <i class="nav-icon fas fa-user-secret"></i>
@@ -130,11 +119,18 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item {{(request()->is('aktivitas/*')?'bg-secondary':'')}} {{(request()->is('sub-aktivitas/*')?'bg-secondary':'')}} ">
+                            <a href="/aktivitas/index" class="nav-link ">
+
+                                <i class="nav-icon fas fa-running"></i>
+                                <p>
+                                    AKTIVITAS
+
+                                </p>
+                            </a>
+                        </li>
+
                         @endif
-
-
-
-
 
 
                         <li class="nav-item 

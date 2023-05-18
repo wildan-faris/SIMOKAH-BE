@@ -16,7 +16,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
-    <form action="/kepala_sekolah/login" method="post">
+    <form action="/kepala-sekolah/login" method="post">
         @csrf
         <div class="input-group mb-3">
             <input type="email" class="form-control" placeholder="Email" name="email" required>
@@ -54,9 +54,6 @@
 
     <!-- /.social-auth-links -->
 
-    <div class="mt-1">
-        <p>Belum Memiliki akun? <a href="/kepala_sekolah/registerIndex">Register</a></p>
-    </div>
 
 </div>
 

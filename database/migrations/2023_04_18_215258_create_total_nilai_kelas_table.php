@@ -18,7 +18,8 @@ class CreateTotalNilaiKelasTable extends Migration
             $table->unsignedBigInteger("sub_aktivitas_id");
             $table->unsignedBigInteger("kelas_id");
             $table->float("nilai");
-            $table->foreign("sub_aktivitas_id")->references("id")->on("sub_aktivitas");
+            $table->foreign("sub_aktivitas_id")->references("id")->on("sub_aktivitas")->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->foreign("kelas_id")->references("id")->on("kelas");
             $table->timestamps();
         });

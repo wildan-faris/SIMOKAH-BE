@@ -31,19 +31,25 @@
     @endif
 
     <!-- session untuk admin -->
-
+    @foreach ($data_total_nilai_kelas_bulan as $dtnkb)
     <div class="card">
-        <div class="card-header">
-            <div class="text-left">
+        <div class="card-header row">
+            <div class="text-left mr-2">
+                <h2>{{$dtnkb->bulan}}</h2>
+            </div>
+            <div class="text-right">
+                <h2>{{$dtnkb->tahun}}</h2>
             </div>
         </div>
+
+
+
         @foreach ($data_aktivitas as $dta)
-
-
         <div class="card-body">
             <div class="card card-primary card-outline">
                 <div class="card-header">
                     <h3 class="card-title">
+
                         <i class="far fa-chart-bar"></i>
                         {{$dta->name}}
                     </h3>
@@ -58,7 +64,10 @@
                     </div>
                 </div>
                 <div class="card-body">
+
                     <div class="col">
+
+
                         @foreach ($dta->sub_aktivitas as $dtasb)
 
 
@@ -67,7 +76,7 @@
                                 {{$dtasb->name}}
                             </div>
                             <div class="col-md-10">
-                                @foreach ($data_total_nilai_kelas as $dttnk)
+                                @foreach ($dtnkb->total_nilai_kelas_bulan as $dttnk)
                                 @if ($dttnk->kelas_id == $data_kelas->id)
                                 @if ($dttnk->sub_aktivitas_id == $dtasb->id)
 
@@ -86,6 +95,7 @@
                             </div>
                         </div>
                         @endforeach
+
                     </div>
 
 
@@ -98,6 +108,7 @@
 
 
     </div>
+    @endforeach
     @section('scripts')
 
     @endsection
