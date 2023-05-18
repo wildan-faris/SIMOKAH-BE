@@ -158,8 +158,8 @@
                     <span class="info-box-icon bg-info"><i class="nav-icon fas fa-users"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">{{$dtk->name}}</span>
-                        <span class="info-box-number">{{count($dtk->siswa)}} Siswa</span>
+                        <span class="info-box-text text-dark">{{$dtk->name}}</span>
+                        <span class="info-box-number text-dark">{{count($dtk->siswa)}} Siswa</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>

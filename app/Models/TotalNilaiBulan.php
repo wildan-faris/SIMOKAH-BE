@@ -12,8 +12,8 @@ class TotalNilaiBulan extends Model
         'sub_aktivitas_id',
         'aktivitas_id',
         'nilai',
-        'bulan',
-        'tahun',
+        'bulan_id',
+
     ];
 
     public function siswa()
@@ -28,5 +28,10 @@ class TotalNilaiBulan extends Model
     public function sub_aktivitas()
     {
         return $this->belongsTo(SubAktivitas::class);
+    }
+
+    public function bulan()
+    {
+        return $this->belongsTo(Bulan::class);
     }
 }

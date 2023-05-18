@@ -45,6 +45,9 @@
                 <a type="button" class="btn btn-primary" href="/kelas/grafik/kelas/{{$data_kelas->id}}">
                     <i class="fas fa-chart-pie"></i> Data Grafik Kelas
                 </a>
+                <a type="button" class="btn btn-primary" href="/kelas/grafik/kelas/bulan/{{$data_kelas->id}}">
+                    <i class="fas fa-chart-pie"></i> Data Grafik Bulanan Kelas
+                </a>
             </div>
 
         </div>

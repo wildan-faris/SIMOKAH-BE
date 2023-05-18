@@ -18,10 +18,11 @@ class CreateTotalNilaiBulansTable extends Migration
             $table->unsignedBigInteger("siswa_id");
             $table->unsignedBigInteger("sub_aktivitas_id");
             $table->unsignedBigInteger("aktivitas_id");
+            $table->unsignedBigInteger("bulan_id");
             $table->float("nilai");
-            $table->string("bulan");
-            $table->integer("tahun");
             $table->foreign("siswa_id")->references("id")->on("siswas")->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign("bulan_id")->references("id")->on("bulans")->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->foreign("sub_aktivitas_id")->references("id")->on("sub_aktivitas")->onDelete('cascade')
                 ->onUpdate('cascade');

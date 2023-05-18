@@ -4,6 +4,7 @@ namespace App\Http\Controllers\WEB\kelas;
 
 use App\Http\Controllers\Controller;
 use App\Models\Aktivitas;
+use App\Models\Bulan;
 use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Siswa;
@@ -90,6 +91,17 @@ class kelasController extends Controller
         $data_total_nilai_kelas = TotalNilaiKelas::get();
         return view('kelas.grafik_kelas', compact("data_siswa", "data_kelas", "data_aktivitas", "data_total_nilai_kelas"));
     }
+    public function grafikBulanByKelas($id)
+    {
+        $data_siswa = Siswa::where("kelas_id", $id)->get();
+        $data_kelas = Kelas::where("id", $id)->first();
+        $data_aktivitas = Aktivitas::with("sub_aktivitas")->get();
+        $data_total_nilai_kelas_bulan = Bulan::with("total_nilai_kelas_bulan")->get();
+        return view('kelas.grafik_kelas_bulan', compact("data_siswa", "data_kelas", "data_aktivitas", "data_total_nilai_kelas_bulan"));
+    }
+
+
+
     public function grafikBySiswa($id)
     {
 

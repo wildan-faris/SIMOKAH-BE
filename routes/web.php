@@ -57,6 +57,7 @@ Route::post('/kelas/edit', [kelasController::class, 'edit']);
 Route::get('/kelas/delete/{id}', [kelasController::class, 'delete']);
 Route::get('/kelas/view/{id}', [kelasController::class, 'siswaByKelas']);
 Route::get('/kelas/grafik/kelas/{id}', [kelasController::class, 'grafikByKelas']);
+Route::get('/kelas/grafik/kelas/bulan/{id}', [kelasController::class, 'grafikBulanByKelas']);
 Route::get('/kelas/grafik/siswa/{id}', [kelasController::class, 'grafikBySiswa']);
 
 

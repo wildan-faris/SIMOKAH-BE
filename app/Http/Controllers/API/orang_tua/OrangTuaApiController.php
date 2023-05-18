@@ -16,7 +16,7 @@ class OrangTuaApiController extends Controller
         try {
             //code...
 
-            $orang_tua = OrangTua::where("id", $id)->get();
+            $orang_tua = OrangTua::where("id", $id)->with("siswa")->get();
 
             return response()->json([
                 'message' => 'success get user by id',

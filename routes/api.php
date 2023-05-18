@@ -153,4 +153,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/siswa/aktivitas', [TotalNilaiBulanController::class, 'getBySiswaAndAktivitas']);
         Route::post('/', [TotalNilaiBulanController::class, 'create']);
     });
+    Route::prefix('total-nilai-kelas-bulan')->middleware('auth.guru.session')->group(function () {
+
+
+        Route::post('/', [TotalNilaiBulanController::class, 'createKelas']);
+    });
 });

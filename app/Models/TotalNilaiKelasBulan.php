@@ -11,8 +11,8 @@ class TotalNilaiKelasBulan extends Model
         'sub_aktivitas_id',
         'nilai',
         'kelas_id',
-        'bulan',
-        'tahun',
+        'bulan_id',
+
 
 
     ];
