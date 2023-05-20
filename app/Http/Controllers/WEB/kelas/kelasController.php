@@ -79,7 +79,7 @@ class kelasController extends Controller
             return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
         }
 
-        $data_siswa = Siswa::where("kelas_id", $id)->get();
+        $data_siswa = Siswa::where("kelas_id", $id)->with("orang_tua")->get();
         $data_kelas = Kelas::where("id", $id)->first();
         return view('kelas.view', compact("data_siswa", "data_kelas"));
     }

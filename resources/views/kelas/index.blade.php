@@ -145,7 +145,7 @@
 
 
     <!-- session untuk kepala sekolah -->
-    @if (session()->get("role") == "kepala sekolah")
+    @if (session()->get("role") == "kepala sekolah" || session()->get("role") == "ahli parenting")
 
 
     <div class="row">
