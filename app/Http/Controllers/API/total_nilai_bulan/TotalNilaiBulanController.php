@@ -51,12 +51,13 @@ class TotalNilaiBulanController extends Controller
             return response()->json(['message' => 'Failed get data by id', 'error' => $th], 500);
         }
     }
-    public function getBySiswaAndAktivitas(Request $request)
+    public function getBySiswaAndAktivitasAndBulan(Request $request)
     {
         try {
 
-            $total_nilai_bulan = TotalNilaiBulan::with("siswa")->with("aktivitas")->with("sub_aktivitas")->with("bulan")->where("siswa_id", $request->siswa_id)->where("aktivitas_id", $request->aktivitas_id)->get();
+            $data_bulan = Bulan::where("bulan", $request->bulan)->where("tahun", $request->tahun)->first();
 
+            $total_nilai_bulan = TotalNilaiBulan::with("siswa")->with("aktivitas")->with("sub_aktivitas")->with("bulan")->where("siswa_id", $request->siswa_id)->where("aktivitas_id", $request->aktivitas_id)->where("bulan_id", $data_bulan->id)->get();
 
 
             return response()->json([
