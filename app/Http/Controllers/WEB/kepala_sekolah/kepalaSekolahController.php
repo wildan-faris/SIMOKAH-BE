@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\WEB\kepala_sekolah;
 
 use App\Http\Controllers\Controller;
+use App\Models\AhliParenting;
 use App\Models\KepalaSekolah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -57,21 +58,41 @@ class kepalaSekolahController extends Controller
     public function login(Request $request)
     {
 
-        $data = KepalaSekolah::where("email", $request->email)->first();
+        $data_kepsek = KepalaSekolah::where("email", $request->email)->first();
 
-        if ($data == null) {
+        if ($data_kepsek == null) {
+            $data_ahli_parenting = AhliParenting::where("email", $request->email)->first();
 
-            return redirect("/kepala-sekolah/loginIndex")->with("failed", "gagal login");
+            if ($data_ahli_parenting == null) {
+                return redirect("/kepala-sekolah/loginIndex")->with("failed", "gagal login");
+            } else {
+
+                if (Hash::check($request->password, $data_kepsek->password)) {
+                    KepalaSekolah::where("id", $data_kepsek->id)->update([
+                        "remember_token" => Str::random(60),
+                    ]);
+                    $request->session()->put('name', $data_kepsek->name);
+                    $request->session()->put('role', "kepala sekolah");
+
+
+
+                    $request->session()->put('remember_token', $data_kepsek->remember_token);
+
+                    return redirect("/")->with("success", $request->session()->get("remember_token"));
+                }
+            }
         }
 
-        if (Hash::check($request->password, $data->password)) {
-
-            $request->session()->put('name', $data->name);
+        if (Hash::check($request->password, $data_kepsek->password)) {
+            KepalaSekolah::where("id", $data_kepsek->id)->update([
+                "remember_token" => Str::random(60),
+            ]);
+            $request->session()->put('name', $data_kepsek->name);
             $request->session()->put('role', "kepala sekolah");
 
 
 
-            $request->session()->put('remember_token', $data->remember_token);
+            $request->session()->put('remember_token', $data_kepsek->remember_token);
 
             return redirect("/")->with("success", $request->session()->get("remember_token"));
         }

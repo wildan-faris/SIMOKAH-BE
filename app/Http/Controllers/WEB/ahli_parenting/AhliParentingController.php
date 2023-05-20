@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AhliParenting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AhliParentingController extends Controller
 {
@@ -40,6 +41,7 @@ class AhliParentingController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'photo_profil' => "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png",
+            'remember_token' => Str::random(60),
         ]);
         return redirect('/ahli-parenting/index')->with("success_create", "Berhasil Menambahkan Data");
     }
