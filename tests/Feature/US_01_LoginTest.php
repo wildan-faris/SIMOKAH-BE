@@ -68,7 +68,7 @@ class US_01_LoginTest extends TestCase
     public function kepala_sekolah_dapat_mengakses_laman_login()
     {
 
-        $response = $this->get('/kepala_sekolah/loginIndex');
+        $response = $this->get('/kepala-sekolah/loginIndex');
 
         $response->assertStatus(200);
         $response->assertViewIs('kepala_sekolah.login');
@@ -78,7 +78,7 @@ class US_01_LoginTest extends TestCase
     public function test_kepala_sekolah_dapat_melakukan_login()
     {
 
-        $response = $this->from('/kepala_sekolah/loginIndex')->post('/kepala_sekolah/login', [
+        $response = $this->from('/kepala-sekolah/loginIndex')->post('/kepala-sekolah/login', [
             'email' => $this->kepala_sekolah->email,
             'password' => "password_kepala_sekolah",
         ]);
@@ -93,7 +93,7 @@ class US_01_LoginTest extends TestCase
     public function test_kepala_sekolah_tidak_dapat_melakukan_login_dengan_nama_yang_salah()
     {
 
-        $response = $this->from('/kepala_sekolah/loginIndex')->post('/kepala_sekolah/login', [
+        $response = $this->from('/kepala-sekolah/loginIndex')->post('/kepala-sekolah/login', [
             'name' => "nama_kepala_sekolah_salah",
             'password' => "password_kepala_sekolah",
         ]);
@@ -108,7 +108,7 @@ class US_01_LoginTest extends TestCase
 
         info($this->kepala_sekolah->email);
 
-        $response = $this->from('/kepala_sekolah/loginIndex')->post('/kepala_sekolah/login', [
+        $response = $this->from('/kepala-sekolah/loginIndex')->post('/kepala-sekolah/login', [
             'name' => $this->kepala_sekolah->name,
             'password' => "password_kepala_sekolah_salah",
         ]);

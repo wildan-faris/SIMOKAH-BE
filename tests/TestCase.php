@@ -31,13 +31,17 @@ abstract class TestCase extends BaseTestCase
     public Admin $admin;
     public Siswa $siswa;
 
+    public function generate_remember_token(){
+        return Str::random(60);
+    }
+
 
     protected function setUp(): void
     {
         parent::setUp();
 
         Admin::insert([
-            "name" => "nama_admin",
+            "name" => 'nama_admin',
             "password" => Hash::make("password_admin"),
             'remember_token' => Str::random(60),
             'photo_profil' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'
