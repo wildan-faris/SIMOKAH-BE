@@ -1,8 +1,6 @@
 @extends('template.index')
-
+@section('title', 'Guru')
 @section('content')
-
-
 
 <div class="container">
     <h3 class="text-center text-secondary">TAMBAH DATA GURU</h3>

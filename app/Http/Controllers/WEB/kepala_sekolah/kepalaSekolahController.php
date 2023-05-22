@@ -61,26 +61,8 @@ class kepalaSekolahController extends Controller
         $data_kepsek = KepalaSekolah::where("email", $request->email)->first();
 
         if ($data_kepsek == null) {
-            $data_ahli_parenting = AhliParenting::where("email", $request->email)->first();
 
-            if ($data_ahli_parenting == null) {
-                return redirect("/kepala-sekolah/loginIndex")->with("failed", "gagal login, email tidak ada");
-            } else {
-
-                if (Hash::check($request->password, $data_ahli_parenting->password)) {
-                    AhliParenting::where("id", $data_ahli_parenting->id)->update([
-                        "remember_token" => Str::random(60),
-                    ]);
-                    $request->session()->put('name', $data_ahli_parenting->name);
-                    $request->session()->put('role', "ahli parenting");
-
-
-
-                    $request->session()->put('remember_token', $data_ahli_parenting->remember_token);
-
-                    return redirect("/")->with("success", $request->session()->get("remember_token"));
-                }
-            }
+            return redirect("/kepala-sekolah/loginIndex")->with("failed", "gagal login, email tidak ada");
         }
 
         if (Hash::check($request->password, $data_kepsek->password)) {

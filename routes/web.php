@@ -6,6 +6,8 @@ use App\Http\Controllers\WEB\ahli_parenting\AhliParentingController;
 use App\Http\Controllers\WEB\aktivitas\AktivitasController;
 use App\Http\Controllers\WEB\guru\guruController;
 use App\Http\Controllers\WEB\kelas\kelasController;
+use App\Http\Controllers\WEB\orang_tua\orangTuaController;
+use App\Http\Controllers\WEB\siswa\siswaController;
 use App\Http\Controllers\WEB\sub_aktivitas\SubAktivitasController;
 use App\Models\Aktivitas;
 use App\Models\Guru;
@@ -25,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     if (session()->get("remember_token") == "") {
-        return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
+        return redirect("/kepala-sekolah/loginIndex");
     }
     $data_guru = Guru::count();
     $data_kelas = Kelas::count();
@@ -42,12 +44,26 @@ Route::get('/guru/create/index', [guruController::class, 'createIndex']);
 Route::post('/guru/create', [guruController::class, 'create']);
 Route::post('/guru/edit', [guruController::class, 'edit']);
 Route::get('/guru/delete/{id}', [guruController::class, 'delete']);
+
+
+// orang-tua controller
+Route::get('/orang-tua/index', [orangTuaController::class, 'index']);
+Route::get('/orang-tua/create/index', [orangTuaController::class, 'createIndex']);
+Route::post('/orang-tua/create', [orangTuaController::class, 'create']);
+Route::post('/orang-tua/edit', [orangTuaController::class, 'edit']);
+Route::get('/orang-tua/delete/{id}', [orangTuaController::class, 'delete']);
+Route::get('/orang-tua/viewIndex/{id}', [orangTuaController::class, 'getSiswaByOrangTua']);
+
+
 // ahli_parenting controller
 Route::get('/ahli-parenting/index', [AhliParentingController::class, 'index']);
+Route::get('/ahli-parenting/loginIndex', [AhliParentingController::class, 'loginIndex']);
+Route::post('/ahli-parenting/login', [AhliParentingController::class, 'login']);
 Route::get('/ahli-parenting/create/index', [AhliParentingController::class, 'createIndex']);
 Route::post('/ahli-parenting/create', [AhliParentingController::class, 'create']);
 Route::post('/ahli-parenting/edit', [AhliParentingController::class, 'edit']);
 Route::get('/ahli-parenting/delete/{id}', [AhliParentingController::class, 'delete']);
+Route::get('/ahli-parenting/logout', [AhliParentingController::class, 'logout']);
 
 // kelas controller
 Route::get('/kelas/index', [kelasController::class, 'index']);
@@ -91,3 +107,6 @@ Route::get('/kepala-sekolah/delete/{id}', [kepalaSekolahController::class, 'dele
 Route::get('/kepala-sekolah/loginIndex', [kepalaSekolahController::class, 'loginIndex']);
 Route::post('/kepala-sekolah/login', [kepalaSekolahController::class, 'login']);
 Route::get('/kepala-sekolah/logout', [kepalaSekolahController::class, 'logout']);
+
+// siswa controller
+Route::get('/siswa/delete/{id}', [siswaController::class, 'delete']);

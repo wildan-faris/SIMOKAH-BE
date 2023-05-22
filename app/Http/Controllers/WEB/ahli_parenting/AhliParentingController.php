@@ -13,16 +13,55 @@ class AhliParentingController extends Controller
     public function index()
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
+            return redirect("/ahli-parenting/loginIndex")->with("failed", "anda belum login");
         }
 
         $data_ahli_parenting = AhliParenting::get();
         return view('ahli_parenting.index', compact("data_ahli_parenting"));
     }
+
+    public function loginIndex()
+    {
+        return view('ahli_parenting.login');
+    }
+
+    public function login(Request $request)
+    {
+
+        $data_ahli_parenting = AhliParenting::where("email", $request->email)->first();
+
+        if ($data_ahli_parenting == null) {
+            $data_ahli_parenting = AhliParenting::where("email", $request->email)->first();
+
+            if ($data_ahli_parenting == null) {
+                return redirect("/ahli-parenting/loginIndex")->with("failed", "gagal login, email tidak ada");
+            }
+        }
+
+        if (Hash::check($request->password, $data_ahli_parenting->password)) {
+            AhliParenting::where("id", $data_ahli_parenting->id)->update([
+                "remember_token" => Str::random(60),
+            ]);
+            $request->session()->put('name', $data_ahli_parenting->name);
+            $request->session()->put('role', "ahli parenting");
+
+
+
+            $request->session()->put('remember_token', $data_ahli_parenting->remember_token);
+
+            return redirect("/")->with("success", $request->session()->get("remember_token"));
+        }
+
+
+
+        return redirect("/ahli-parenting/loginIndex")->with("failed", "gagal login");
+    }
+
+
     public function createIndex()
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
+            return redirect("/ahli-parenting/loginIndex")->with("failed", "anda belum login");
         }
         return view('ahli_parenting.create');
     }
@@ -30,7 +69,7 @@ class AhliParentingController extends Controller
     public function create(Request $request)
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
+            return redirect("/ahli-parenting/loginIndex")->with("failed", "anda belum login");
         }
         $get_ahli_parenting = AhliParenting::where("email", $request->email)->first();
         if ($get_ahli_parenting !== null) {
@@ -48,7 +87,7 @@ class AhliParentingController extends Controller
     public function edit(Request $request)
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
+            return redirect("/ahli-parenting/loginIndex")->with("failed", "anda belum login");
         }
         AhliParenting::where("id", $request->id)->update([
             'name' => $request->name,
@@ -61,9 +100,18 @@ class AhliParentingController extends Controller
     public function delete($id)
     {
         if (session()->get("remember_token") == "") {
-            return redirect("/kepala-sekolah/loginIndex")->with("failed", "anda belum login");
+            return redirect("/ahli-parenting/loginIndex")->with("failed", "anda belum login");
         }
         AhliParenting::where("id", $id)->delete();
         return redirect('/ahli-parenting/index')->with("success_delete", "Berhasil Menghapus Data");
+    }
+
+    public function logout(Request $request)
+    {
+        if (session()->get("remember_token") == "") {
+            return redirect("/loginIndex")->with("failed", "gagal login");
+        }
+        $request->session()->flush();
+        return redirect("/ahli-parenting/loginIndex")->with("success", "berhasil logout");
     }
 }

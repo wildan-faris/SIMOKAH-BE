@@ -1,5 +1,5 @@
 @extends('template.index')
-
+@section('title', 'Beranda')
 @section('content')
 <div class="container">
 

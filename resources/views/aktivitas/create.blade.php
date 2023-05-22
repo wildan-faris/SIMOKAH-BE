@@ -1,5 +1,5 @@
 @extends('template.index')
-
+@section('title', 'Aktivitas')
 @section('content')
 
 

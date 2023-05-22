@@ -22,4 +22,8 @@ class Siswa extends Model
     {
         return $this->belongsTo(OrangTua::class);
     }
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
+    }
 }
