@@ -34,13 +34,7 @@
     <div class="card">
         <div class="card-header">
             <div class="text-left">
-
-
-
-
             </div>
-
-
 
         </div>
 
