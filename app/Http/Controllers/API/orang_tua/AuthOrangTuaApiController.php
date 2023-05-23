@@ -57,7 +57,8 @@ class AuthOrangTuaApiController extends Controller
                 "tempat_lahir" => $request->tempat_lahir_siswa,
                 "tanggal_lahir" => $request->tanggal_lahir_siswa,
                 "orang_tua_id" => $orang_tua->id,
-                "kelas_id" => $request->kelas_id
+                "kelas_id" => $request->kelas_id,
+                "tahun_ajaran" => $request->tahun_ajaran,
             ]);
 
 

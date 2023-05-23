@@ -17,6 +17,7 @@ class CreateSiswasTable extends Migration
             $table->id();
             $table->string("name");
             $table->bigInteger("nis");
+            $table->bigInteger("tahun_ajaran");
             $table->string("jenis_kelamin");
             $table->string("tempat_lahir");
             $table->date("tanggal_lahir");

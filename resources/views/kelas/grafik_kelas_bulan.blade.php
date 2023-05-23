@@ -1,5 +1,5 @@
 @extends('template.index')
-
+@section('title', 'Kelas')
 @section('content')
 <div class="container">
     <h3 class="text-center text-secondary">DATA GRAFIK {{strtoupper($data_kelas->name)}}</h3>

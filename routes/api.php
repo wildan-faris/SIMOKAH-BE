@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\ahli_parenting\AuthAhliParentingApiController;
 use App\Http\Controllers\API\aktivitas\AktivitasApiController;
+use App\Http\Controllers\API\bulan\BulanController;
 use App\Http\Controllers\API\guru\AuthGuruApiController;
 use App\Http\Controllers\API\guru\GuruApiController;
 use App\Http\Controllers\API\kelas\KelasApiController;
@@ -150,9 +151,19 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
         Route::get('/', [TotalNilaiBulanController::class, 'getAll']);
         Route::get('/{id}', [TotalNilaiBulanController::class, 'getById']);
-        Route::get('/siswa/aktivitas', [TotalNilaiBulanController::class, 'getBySiswaAndAktivitas']);
+        Route::get('/siswa/aktivitas', [TotalNilaiBulanController::class, 'getBySiswaAndAktivitasAndBulan']);
         Route::post('/', [TotalNilaiBulanController::class, 'create']);
     });
+
+    Route::prefix('bulan')->middleware('auth.guru.session')->group(function () {
+
+        Route::get('/', [BulanController::class, 'getAll']);
+        Route::get('/bulan-name', [BulanController::class, 'getByBulan']);
+        Route::get('/bulan-and-tahun', [BulanController::class, 'getByBulanandTahun']);
+    });
+
+
+
     Route::prefix('total-nilai-kelas-bulan')->middleware('auth.guru.session')->group(function () {
 
 

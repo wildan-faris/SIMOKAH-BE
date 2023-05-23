@@ -1,5 +1,5 @@
 @extends('template.index')
-
+@section('title', 'Ahli Parenting')
 @section('content')
 <div class="container">
     <h3 class="text-center text-secondary">DATA ahli-parenting</h3>

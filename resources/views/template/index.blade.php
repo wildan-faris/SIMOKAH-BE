@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-
+    <title>PHAS | @yield('title', config('app.name', 'Laravel'))</title>
+    <link rel="icon" href="{{asset('logo.png')}}" type="image/png">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -44,8 +44,12 @@
                     <a href="/admin/logout" class="text-white">
                         <div class=""><i class="fas fa-sign-out-alt"></i> Logout</div>
                     </a>
-                    @elseif (session()->get('role') === "kepala sekolah")
+                    @elseif (session()->get('role') === "kepala sekolah" )
                     <a href="/kepala-sekolah/logout" class="text-white">
+                        <div class=""><i class="fas fa-sign-out-alt"></i> Logout</div>
+                    </a>
+                    @elseif (session()->get("role") == "ahli parenting")
+                    <a href="/ahli-parenting/logout" class="text-white">
                         <div class=""><i class="fas fa-sign-out-alt"></i> Logout</div>
                     </a>
                     @endif
@@ -129,6 +133,17 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item 
+                        {{(request()->is('orang-tua/*')?'bg-secondary':'')}}
+                         ">
+                            <a href="/orang-tua/index" class="nav-link ">
+                                <i class="nav-icon fas fa-user-tie"></i>
+                                <p>
+                                    ORANG TUA
+
+                                </p>
+                            </a>
+                        </li>
 
                         @endif
 
@@ -144,6 +159,7 @@
                                 </p>
                             </a>
                         </li>
+
 
 
 

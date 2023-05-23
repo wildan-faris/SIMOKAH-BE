@@ -1,5 +1,5 @@
 @extends('template.index')
-
+@section('title', 'Kelas')
 @section('content')
 <div class="container">
     <h3 class="text-center text-secondary">DATA KELAS</h3>
@@ -145,7 +145,7 @@
 
 
     <!-- session untuk kepala sekolah -->
-    @if (session()->get("role") == "kepala sekolah")
+    @if (session()->get("role") == "kepala sekolah" || session()->get("role") == "ahli parenting")
 
 
     <div class="row">

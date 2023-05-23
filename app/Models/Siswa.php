@@ -15,5 +15,15 @@ class Siswa extends Model
         'tanggal_lahir',
         'orang_tua_id',
         'kelas_id',
+        'tahun_ajaran'
     ];
+
+    public function orang_tua()
+    {
+        return $this->belongsTo(OrangTua::class);
+    }
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
+    }
 }

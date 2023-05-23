@@ -1,5 +1,5 @@
 @extends('template.auth')
-
+@section('title', 'Kepala Sekolah')
 @section('content')
 
 <div class="card-body login-card-body">

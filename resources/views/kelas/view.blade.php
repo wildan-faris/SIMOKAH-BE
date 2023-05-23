@@ -1,5 +1,5 @@
 @extends('template.index')
-
+@section('title', 'Kelas')
 @section('content')
 <div class="container">
     <h3 class="text-center text-secondary">DATA {{strtoupper($data_kelas->name)}}</h3>
@@ -60,7 +60,8 @@
                         <tr>
                             <th>No</th>
                             <th>Name</th>
-
+                            <th>Tahun Ajaran</th>
+                            <th>Nama Orang Tua</th>
                             <th>Aksi</th>
 
                         </tr>
@@ -73,6 +74,8 @@
                         <tr class="text-center fw-normal">
                             <td>{{$no++}} </td>
                             <td>{{$dts->name}}</td>
+                            <td>{{$dts->tahun_ajaran}}</td>
+                            <td>{{$dts->orang_tua->name}}</td>
 
                             <td>
                                 <a href="/kelas/grafik/siswa/{{$dts->id}}" class="btn btn-sm btn-primary"><i class="fas fa-chart-pie text-white"></i></a>
