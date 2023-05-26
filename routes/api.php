@@ -134,7 +134,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
         Route::get('/', [NilaiAPIController::class, 'getAll']);
         Route::get('/{id}', [NilaiAPIController::class, 'getById']);
-        Route::get('/sub-aktivitas/siswa', [NilaiAPIController::class, 'getBySiswaAndSubAktivitas']);
+        Route::post('/sub-aktivitas/siswa', [NilaiAPIController::class, 'getBySiswaAndSubAktivitas']);
         Route::post('/', [NilaiAPIController::class, 'create']);
         Route::put('/{id}', [NilaiAPIController::class, 'update']);
         Route::delete('/{id}', [NilaiAPIController::class, 'delete']);
@@ -143,7 +143,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
         Route::get('/', [TotalNilaiApiController::class, 'getAll']);
         Route::get('/{id}', [TotalNilaiApiController::class, 'getById']);
-        Route::get('/siswa/aktivitas', [TotalNilaiApiController::class, 'getBySiswaAndAktivitas']);
+        Route::post('/siswa/aktivitas', [TotalNilaiApiController::class, 'getBySiswaAndAktivitas']);
         Route::delete('/{id}', [TotalNilaiApiController::class, 'delete']);
     });
 
@@ -151,15 +151,15 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
         Route::get('/', [TotalNilaiBulanController::class, 'getAll']);
         Route::get('/{id}', [TotalNilaiBulanController::class, 'getById']);
-        Route::get('/siswa/aktivitas', [TotalNilaiBulanController::class, 'getBySiswaAndAktivitasAndBulan']);
+        Route::post('/siswa/aktivitas', [TotalNilaiBulanController::class, 'getBySiswaAndAktivitasAndBulan']);
         Route::post('/', [TotalNilaiBulanController::class, 'create']);
     });
 
     Route::prefix('bulan')->middleware('auth.guru.session')->group(function () {
 
         Route::get('/', [BulanController::class, 'getAll']);
-        Route::get('/bulan-name', [BulanController::class, 'getByBulan']);
-        Route::get('/bulan-and-tahun', [BulanController::class, 'getByBulanandTahun']);
+        Route::post('/bulan-name', [BulanController::class, 'getByBulan']);
+        Route::post('/bulan-and-tahun', [BulanController::class, 'getByBulanandTahun']);
     });
 
 

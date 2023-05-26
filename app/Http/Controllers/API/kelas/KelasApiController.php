@@ -20,7 +20,7 @@ class KelasApiController extends Controller
     public function getById($id)
     {
         try {
-            $kelas = Kelas::where("id", $id)->with("siswa")->with("guru")->first();
+            $kelas = Kelas::where("guru_id", $id)->with("siswa")->with("guru")->first();
 
             if ($kelas == null) {
                 return response()->json(['message' => 'data not found'], 404);
