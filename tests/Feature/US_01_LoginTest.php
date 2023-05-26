@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class US_01_LoginTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     public function test_admin_dapat_mengakses_laman_login()
     {
@@ -94,12 +94,12 @@ class US_01_LoginTest extends TestCase
     {
 
         $response = $this->from('/kepala-sekolah/loginIndex')->post('/kepala-sekolah/login', [
-            'name' => "nama_kepala_sekolah_salah",
+            'email' => "email_kepala_sekolah_salah",
             'password' => "password_kepala_sekolah",
         ]);
 
         $response->assertRedirect();
-        $response->assertSessionHas('failed', 'gagal login');
+        $response->assertSessionHas('failed', 'gagal login, email tidak ada');
 
     }
 
@@ -109,7 +109,7 @@ class US_01_LoginTest extends TestCase
         info($this->kepala_sekolah->email);
 
         $response = $this->from('/kepala-sekolah/loginIndex')->post('/kepala-sekolah/login', [
-            'name' => $this->kepala_sekolah->name,
+            'email' => $this->kepala_sekolah->email,
             'password' => "password_kepala_sekolah_salah",
         ]);
 

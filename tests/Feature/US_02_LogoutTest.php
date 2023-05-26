@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class US_02_LogoutTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     public function login_action($fromURL, $toURL, $data ){
         return $this->from($fromURL)->post($toURL, $data);

@@ -15,12 +15,13 @@ use App\Models\Kelas;
 use App\Models\KepalaSekolah;
 use App\Models\OrangTua;
 use App\Models\Siswa;
-
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
     use WithFaker;
+    use RefreshDatabase;
 
     public Kelas $kelas;
 
@@ -99,7 +100,8 @@ abstract class TestCase extends BaseTestCase
             "tempat_lahir" => "tempat_lahir_siswa",
             "tanggal_lahir" => $this->faker()->date(),
             "orang_tua_id" => $this->orang_tua->id,
-            "kelas_id" => $this->kelas->id
+            "kelas_id" => $this->kelas->id,
+            "tahun_ajaran" => 2020
         ]);
         $this->siswa = Siswa::first();
 
