@@ -78,9 +78,7 @@ class OrangTuaApiController extends Controller
 
             $image = $request->file('photo_profil');
             $namePhoto = time() . $image->getClientOriginalName();
-            if ($image->getClientMimeType() == 'application/pdf') {
-                return redirect('/createIndex')->with("failed", "File harus berupa png or jpg");
-            }
+
             // isi dengan nama folder tempat kemana file diupload
             $tujuan_upload = 'photo-profil-orang_tua';
 
