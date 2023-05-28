@@ -12,7 +12,7 @@ class US_03_ChangePasswordTest extends TestCase
 {
     // use RefreshDatabase;
 
-    public function test_gutu_dapat_mengubah_password()
+    public function test_guru_dapat_mengubah_password()
     {
         Auth::login($this->guru);
 
