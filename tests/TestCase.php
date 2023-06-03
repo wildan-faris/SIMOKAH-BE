@@ -19,9 +19,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication;
-    use WithFaker;
-    use RefreshDatabase;
+    use CreatesApplication, WithFaker, RefreshDatabase;
 
     public Kelas $kelas;
 
