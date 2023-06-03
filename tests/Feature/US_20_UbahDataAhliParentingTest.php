@@ -32,9 +32,12 @@ class US_20_UbahDataAhliParentingTest extends TestCase
 
         $response = $this->post('/ahli-parenting/edit', $request);
 
+        // assert response
         $response->assertStatus(302);
         $response->assertRedirect('/ahli-parenting/index');
         $response->assertSessionHas("success_edit", "Berhasil Mengubah Data");
+
+        // assert database
         $this->assertDatabaseHas('ahli_parentings', [
             'id' => $ahli_parenting_target->id,
             'name' => $request["name"],

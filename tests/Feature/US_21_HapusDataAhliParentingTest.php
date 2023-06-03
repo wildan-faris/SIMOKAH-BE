@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class US_21_HapusDataAhliParentingTest extends TestCase
 {
-    public function test_admin_dapat_menghapus_data_guru()
+    public function test_admin_dapat_menghapus_data_ahli_parenting()
     {
         // login
         $response = $this->from('/admin/loginIndex')->post('/admin/login', [
