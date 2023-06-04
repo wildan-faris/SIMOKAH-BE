@@ -18,12 +18,6 @@ class US_30_LihatDataKelasTest extends TestCase
             'password' => "password_admin",
         ]);
 
-        // create kelas
-        $request = [
-            'name' => $this->faker()->jobTitle(),
-            "guru_id" => $this->guru->id,
-        ];
-
         // request
         $kelas = Kelas::with(['guru', "siswa"])->get();
         $guru = Guru::get();
