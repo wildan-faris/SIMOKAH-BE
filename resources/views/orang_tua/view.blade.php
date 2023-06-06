@@ -33,7 +33,10 @@
 
     <div class="card">
         <div class="card-header">
-            <div class="text-left">
+            <div class="text-right">
+                <a type="button" class="btn btn-primary" href="/orang-tua/siswa/create/index/{{$dtot->id}}">
+                    <i class="fas fa-user-plus"> </i> Tambah Data
+                </a>
             </div>
 
         </div>
@@ -71,6 +74,7 @@
 
 
                                 <a href="/siswa/delete/{{$dts->id}}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                <a href="/orang-tua/siswa/edit/index/{{$dts->id}}" class="btn btn-sm btn-warning text-white"><i class="fas fa-edit"></i></a>
 
                             </td>
                         </tr>
