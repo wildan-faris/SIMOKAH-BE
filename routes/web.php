@@ -49,6 +49,11 @@ Route::get('/guru/delete/{id}', [guruController::class, 'delete']);
 // orang-tua controller
 Route::get('/orang-tua/index', [orangTuaController::class, 'index']);
 Route::get('/orang-tua/create/index', [orangTuaController::class, 'createIndex']);
+Route::get('/orang-tua/siswa/create/index/{id}', [orangTuaController::class, 'createSiswaIndex']);
+Route::get('/orang-tua/siswa/edit/index/{siswa_id}', [orangTuaController::class, 'editSiswaIndex']);
+Route::post('/orang-tua/siswa/create', [orangTuaController::class, 'createSiswa']);
+Route::post('/orang-tua/siswa/edit', [orangTuaController::class, 'editSiswa']);
+Route::get('/orang-tua/edit/index/{id}', [orangTuaController::class, 'editIndex']);
 Route::post('/orang-tua/create', [orangTuaController::class, 'create']);
 Route::post('/orang-tua/edit', [orangTuaController::class, 'edit']);
 Route::get('/orang-tua/delete/{id}', [orangTuaController::class, 'delete']);

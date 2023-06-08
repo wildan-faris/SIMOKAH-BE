@@ -40,7 +40,7 @@
             </div>
 
             <div class="text-right">
-                <a type="button" class="btn btn-primary" href="/orang_tua/create/index">
+                <a type="button" class="btn btn-primary" href="/orang-tua/create/index">
                     <i class="fas fa-user-plus"> </i> Tambah Data
                 </a>
             </div>
@@ -76,6 +76,7 @@
                             <td>
 
                                 <a href="/orang-tua/viewIndex/{{$dtot->id}}" class="btn btn-sm btn-primary"><i class="fas fa-users text-white"></i></a>
+                                <a href="/orang-tua/edit/index/{{$dtot->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit text-white"></i></a>
 
                                 <a href="/orang-tua/delete/{{$dtot->id}}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
 
